@@ -1,0 +1,113 @@
+.swiperCustom {
+  max-width: 445px;
+  min-width: 445px;
+
+  @media screen and (max-width: 820px) {
+    max-width: 136px;
+    min-width: 136px;
+  }
+
+  @media screen and (max-width: 420px) {
+    max-width: 186px;
+    min-width: 186px;
+  }
+
+  &__imgLg {
+    display: block;
+    width: 445px;
+    height: 593px;
+
+    @media screen and (max-width: 820px) {
+      width: 136px;
+      height: 198px;
+    }
+
+    @media screen and (max-width: 420px) {
+      width: 188px;
+      height: 259.56px;
+    }
+  }
+
+  &__pagination {
+    position: relative;
+
+    &_blur {
+      display: block;
+      position: absolute;
+      width: 30px;
+      height: 86px;
+      top: 0;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.2) 100%);
+      z-index: 10;
+
+      &:last-child {
+        right: 0;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 1) 100%);
+      }
+
+      @media screen and (max-width: 820px) {
+        display: none;
+      }
+    }
+  }
+
+  &__swiperMain {
+    .swiper-pagination {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: static;
+      margin-top: 24px;
+
+      @media screen and (min-width: 820px) {
+        display: none;
+      }
+
+      &-bullet {
+        width: 7px;
+        height: 7px;
+
+        &-active {
+          width: 9px;
+          height: 9px;
+          background: #363636;
+        }
+      }
+    }
+  }
+
+  &__mySwiper {
+    margin-top: 17px;
+    .swiper-horizontal > .swiper-scrollbar,
+    .swiper-scrollbar.swiper-scrollbar-horizontal {
+      position: static;
+      margin-top: 8px;
+      height: 6px;
+
+      .swiper-scrollbar-drag {
+        height: 6px;
+        background: #a7a7a7;
+        border-radius: 4px;
+      }
+
+      @media screen and (max-width: 820px) {
+        display: none;
+      }
+    }
+
+    .swiper-wrapper {
+      @media screen and (max-width: 820px) {
+        display: none;
+      }
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 65px;
+    height: 86px;
+    border: 1px solid #bfc4c9;
+    border-radius: 3px;
+  }
+}
