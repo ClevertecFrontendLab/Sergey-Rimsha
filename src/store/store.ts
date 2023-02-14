@@ -4,9 +4,13 @@ import thunkMiddleware from 'redux-thunk';
 import { configureStore } from '@reduxjs/toolkit';
 
 import { appReducer } from './app-reducer';
+import { bookInfoReducer } from './book-info-reducer';
+import { booksReducer } from './books-reducer';
 
 const rootReducer = combineReducers({
   app: appReducer,
+  books: booksReducer,
+  bookInfo: bookInfoReducer,
 });
 
 export const store = configureStore({

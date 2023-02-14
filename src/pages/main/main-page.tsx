@@ -8,6 +8,8 @@ import icon_list_active from '../../assets/icon/icon_list_active.svg';
 import book from '../../assets/jpg/book_lg.jpg';
 import { BookCard } from '../../components/book-card';
 import { InputSearch } from '../../components/input-search';
+import { getBooksTC } from '../../store/books-reducer';
+import { useAppDispatch } from '../../store/store';
 
 import s from './main-page.module.scss';
 
@@ -129,6 +131,7 @@ export const cards: CardI[] = [
 ];
 
 export const MainPage = () => {
+  const dispatch = useAppDispatch();
   const [viewCards, setViewCards] = useState<'GRID' | 'LIST'>('GRID');
   const [styleViewGrid, setStyleViewGrid] = useState(`${s.menu__item} ${s.menu__item_active}`);
   const [styleViewList, setStyleViewList] = useState(`${s.menu__item}`);
@@ -152,7 +155,9 @@ export const MainPage = () => {
       setStyleViewGrid(styleDefault);
       setContentView(`${s.main__content_list}`);
     }
-  }, [viewCards]);
+
+    dispatch(getBooksTC());
+  }, [dispatch, viewCards]);
 
   return (
     <section className={s.main}>
