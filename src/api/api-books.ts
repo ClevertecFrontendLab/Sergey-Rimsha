@@ -14,6 +14,6 @@ const instance = axios.create({
 
 export const booksApi = {
   getBooks() {
-    return instance.get<ResponseI<BookI[]>>('/api/books');
+    return instance.get<BookI[]>('/api/books');
   },
 };

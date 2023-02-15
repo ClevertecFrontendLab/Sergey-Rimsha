@@ -1,6 +1,6 @@
 export interface BookingI {
   id: number;
-  order: boolean;
+  order: boolean | null;
   dateOrder: string;
   customerId: number;
   customerFirstName: string;
@@ -24,15 +24,15 @@ export interface HistoryI {
 
 export interface BookI {
   issueYear: string;
-  rating: number;
+  rating: number | null;
   title: string;
   authors: string[];
   image: {
     url: string;
-  };
+  } | null;
   categories: string[];
   id: number;
-  booking: BookingI;
-  delivery: DeliveryI;
-  histories: HistoryI[];
+  booking: BookingI | null;
+  delivery: DeliveryI | null;
+  histories: HistoryI[] | null;
 }

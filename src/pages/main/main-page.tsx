@@ -8,7 +8,7 @@ import icon_list_active from '../../assets/icon/icon_list_active.svg';
 import book from '../../assets/jpg/book_lg.jpg';
 import { BookCard } from '../../components/book-card';
 import { InputSearch } from '../../components/input-search';
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { getBooksTC } from '../../store/books-reducer';
 
 import s from './main-page.module.scss';
@@ -138,6 +138,8 @@ export const MainPage = () => {
 
   const [contentView, setContentView] = useState(`${s.main__content_grid}`);
 
+  const items = useAppSelector((state) => state.books.items);
+
   const onClickView = () => {
     setViewCards((prevState) => (prevState === 'GRID' ? 'LIST' : 'GRID'));
   };
@@ -181,16 +183,17 @@ export const MainPage = () => {
         </div>
       </div>
       <div className={`${s.main__content} ${contentView}`}>
-        {cards.map((card) => (
+        {items.map((card) => (
           <BookCard
             key={card.id}
             id={card.id}
             view={viewCards}
-            description={card.description}
+            authors={card.authors}
             title={card.title}
             booking={card.booking}
             image={card.image}
             rating={card.rating}
+            categories={card.categories}
           />
         ))}
       </div>

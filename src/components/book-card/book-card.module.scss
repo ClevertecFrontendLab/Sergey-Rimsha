@@ -26,9 +26,10 @@
   }
 
   &__img {
-    border-radius: 10px;
-
     & img {
+      display: block;
+      border-radius: 10px;
+      border: 1px solid #a7a7a7;
       width: 174px;
       height: 242px;
     }
@@ -48,10 +49,13 @@
   }
 
   &__title {
+    max-height: 72px;
     font-size: 14px;
     letter-spacing: 0.1px;
     color: #363636;
     margin-top: 19px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
     @media screen and (max-width: 820px) {
       font-weight: 700;
@@ -64,8 +68,11 @@
     }
   }
 
-  &__description {
-    word-wrap: break-word;
+  &__authors {
+    max-height: 18px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-weight: 400;
     font-size: 14px;
     letter-spacing: 0.1px;
@@ -126,7 +133,6 @@
   padding: 24px 24px 24px 16px;
   margin-bottom: 16px;
 
-
   @media screen and (max-width: 820px) {
     width: 640px;
     height: 240px;
@@ -140,17 +146,15 @@
   }
 
   &__img {
-    & img {
-      display: inline-block;
-      max-width: 120px;
-      max-height: 170px;
-    }
+    display: block;
+    border: 1px solid #A7A7A7;
+    border-radius: 3px;
+    max-width: 120px;
+    max-height: 170px;
 
     @media screen and (max-width: 420px) {
-      & img {
-        max-width: 70px;
-        max-height: 100px;
-      }
+      max-width: 70px;
+      max-height: 100px;
     }
   }
 
@@ -195,7 +199,7 @@
     }
   }
 
-  &__description {
+  &__authors {
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;

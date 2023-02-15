@@ -1,5 +1,3 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
 import { BookInfoI } from '../interface/book-info-i/book-info-i';
 import { ErrorResponseI } from '../interface/utils-i/utils-i';
 
@@ -70,16 +68,16 @@ const initialState: InitialStateI = {
   error: null,
 };
 
-const slice = createSlice({
-  name: 'books',
-  initialState,
-  reducers: {
-    setBookInfoAC(state, action: PayloadAction<{ bookInfo: BookInfoI }>) {
-      state.item = action.payload.bookInfo;
-    },
-  },
-});
-
-export const bookInfoReducer = slice.reducer;
-
-export const { setBookInfoAC } = slice.actions;
+// const slice = createSlice({
+//   name: 'books',
+//   initialState,
+//   reducers: {
+//     setBookInfoAC(state, action: PayloadAction<{ bookInfo: BookInfoI }>) {
+//       state.item = action.payload.bookInfo;
+//     },
+//   },
+// });
+//
+// export const bookInfoReducer = slice.reducer;
+//
+// export const { setBookInfoAC } = slice.actions;
