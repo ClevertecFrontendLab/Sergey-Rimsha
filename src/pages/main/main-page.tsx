@@ -8,8 +8,8 @@ import icon_list_active from '../../assets/icon/icon_list_active.svg';
 import book from '../../assets/jpg/book_lg.jpg';
 import { BookCard } from '../../components/book-card';
 import { InputSearch } from '../../components/input-search';
+import { useAppDispatch } from '../../hooks/hooks';
 import { getBooksTC } from '../../store/books-reducer';
-import { useAppDispatch } from '../../store/store';
 
 import s from './main-page.module.scss';
 

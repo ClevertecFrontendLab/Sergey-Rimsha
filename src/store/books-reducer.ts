@@ -1,41 +1,74 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 
 import { booksApi } from '../api/api-books';
 import { BookI } from '../interface/book-i/book-i';
-import { ErrorI } from '../interface/error-i/error-i';
+import { ErrorResponseI } from '../interface/utils-i/utils-i';
+
+import { AppDispatch } from './store';
 
 interface InitialStateI {
-  books: BookI[];
-  error: ErrorI | null;
+  items: BookI[];
+  error: ErrorResponseI | null;
+  loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 const initialState: InitialStateI = {
-  books: [],
+  items: [],
   error: null,
+  loading: 'idle',
 };
 
-export const getBooksTC = createAsyncThunk('books/getBooks', async (arg, { dispatch }) => {
-  try {
-    const res = await booksApi.getBooks();
+type AsyncThunkConfigType = {
+  dispatch?: AppDispatch;
+  rejectValue?: {
+    error?: ErrorResponseI;
+  };
+};
 
-    console.log(res.data.data);
+export const getBooksTC = createAsyncThunk<any, undefined, AsyncThunkConfigType>(
+  'books/getBooksTC',
+  async (arg, { dispatch }) => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      dispatch(setStatusLoading({ loading: 'pending' }));
+      const response = await booksApi.getBooks();
 
-    // dispatch(setBooksAC({ books: res.data.data }));
-  } catch (error) {
-    console.log(error);
+      console.log(response.data);
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+
+      return {};
+    } finally {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      dispatch(setStatusLoading({ loading: 'succeeded' }));
+    }
   }
-});
+);
 
 const slice = createSlice({
-  name: 'books',
+  name: 'booksSlice',
   initialState,
   reducers: {
     setBooksAC(state, action: PayloadAction<{ books: BookI[] }>) {
-      state.books = action.payload.books;
+      state.items = action.payload.books;
     },
+    setStatusLoading(state, action: PayloadAction<{ loading: 'idle' | 'pending' | 'succeeded' | 'failed' }>) {
+      state.loading = action.payload.loading;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getBooksTC.fulfilled, (state, action) => {
+      state.items = action.payload;
+      console.log(action.payload);
+    });
+    // builder.addCase(getBooksTC.rejected, (state, action) => {
+    //   // state.error = action.payload.error;
+    // });
   },
 });
 
 export const booksReducer = slice.reducer;
 
-export const { setBooksAC } = slice.actions;
+export const { setBooksAC, setStatusLoading } = slice.actions;

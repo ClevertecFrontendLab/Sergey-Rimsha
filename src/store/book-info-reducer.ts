@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { BookInfoI } from '../interface/book-info-i/book-info-i';
-import { ErrorI } from '../interface/error-i/error-i';
+import { ErrorResponseI } from '../interface/utils-i/utils-i';
 
 interface InitialStateI {
-  bookInfo: BookInfoI;
-  error: ErrorI | null;
+  item: BookInfoI;
+  error: ErrorResponseI | null;
 }
 const initialState: InitialStateI = {
-  bookInfo: {
+  item: {
     id: 1,
     title: 'Грокаем алгоритмы. Иллюстрированное пособие для программистов и любопытствующих',
     rating: 4.3,
@@ -75,7 +75,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     setBookInfoAC(state, action: PayloadAction<{ bookInfo: BookInfoI }>) {
-      state.bookInfo = action.payload.bookInfo;
+      state.item = action.payload.bookInfo;
     },
   },
 });
