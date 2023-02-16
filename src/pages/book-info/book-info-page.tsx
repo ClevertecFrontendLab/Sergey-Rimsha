@@ -1,5 +1,9 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { BookInfoI } from '../../interface/book-info-i/book-info-i';
+import { getBookInfoTC } from '../../store/book-info-reducer';
 import { cards } from '../main/main-page';
 
 import { Comments, Description, Header, Info, Rating, SwiperCustom } from './components';
@@ -7,43 +11,52 @@ import { Comments, Description, Header, Info, Rating, SwiperCustom } from './com
 import s from './book-info-page.module.scss';
 
 export const BookInfoPage = () => {
-  const { id } = useParams();
+  const { id, category } = useParams();
+  const dispatch = useAppDispatch();
 
-  const card = cards.find((element) => element.id === id);
+  const book = useAppSelector<BookInfoI>((state) => state.bookInfo.book);
 
-  let disabled = false;
+  // const card = cards.find((element) => element.id === id);
 
-  let titleBtn = card?.booking.message;
+  const disabled = false;
 
-  if (card?.booking.status === 'open') {
-    titleBtn = 'Забронировать';
-  } else if (card?.booking.status === 'complete') {
-    titleBtn = 'Забронирована';
-  } else {
-    disabled = true;
-  }
+  const titleBtn = 'Забронировать';
+
+  // if (card?.booking.status === 'open') {
+  //   titleBtn = 'Забронировать';
+  // } else if (card?.booking.status === 'complete') {
+  //   titleBtn = 'Забронирована';
+  // } else {
+  //   disabled = true;
+  // }
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getBookInfoTC(id));
+    }
+  }, [dispatch, id]);
 
   return (
     <section className={s.bookInfo}>
-      <Header bookName={card?.title} />
+      <Header bookName={book.title} category={category} />
       <div className={s.container}>
         <div className={s.bookInfo__content}>
-          <SwiperCustom images={card?.image} />
+          <SwiperCustom images={book.images} />
           <div className={s.bookInfo__box}>
-            <div className={s.bookInfo__title}>{card?.title}</div>
-            <div className={s.bookInfo__author}>{card?.description}</div>
+            <div className={s.bookInfo__title}>{book.title}</div>
+            <div className={s.bookInfo__author}>{book.authors[0]}</div>
             <div className={s.bookInfo__button}>
               <button disabled={disabled} type='button'>
                 {titleBtn}
               </button>
             </div>
-            <Description showOnly='lg' />
+            <Description description={book.description} showOnly='lg' />
           </div>
         </div>
-        <Description showOnly='md' />
-        <Rating ratingValue={card?.rating} />
+        <Description description={book.description} showOnly='md' />
+        <Rating ratingValue={book.rating} />
         <Info />
-        <Comments comments={card?.comments} />
+        <Comments comments={book.comments} />
       </div>
     </section>
   );

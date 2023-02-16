@@ -2,8 +2,8 @@ import { useState } from 'react';
 import classNames from 'classnames';
 
 import comment_avatar from '../../../../assets/png/comment_avatar.png';
+import { CommentI } from '../../../../interface/book-info-i/book-info-i';
 import { getStars } from '../../../../utils/utils';
-import { CommentI } from '../../../main/main-page';
 
 import s from './comments.module.scss';
 
@@ -36,8 +36,9 @@ export const Comments = ({ comments = [] }: CommentsI) => {
           <div className={s.comment__wrap}>
             <img className={s.comment__img} src={comment_avatar} alt='avatar' />
             <div className={s.comment__block}>
-              <div className={s.comment__name}>{el.name}</div>
-              <div className={s.comment__date}>{el.data}</div>
+              <div className={s.comment__name}>{el.user.firstName}</div>
+              {/* add last name */}
+              <div className={s.comment__date}>{el.createdAt}</div>
             </div>
           </div>
           <div className={s.comment__rating}>
@@ -46,7 +47,7 @@ export const Comments = ({ comments = [] }: CommentsI) => {
               <img key={i} src={item} alt='star' />
             ))}
           </div>
-          <div className={s.comment__message}>{el.message?.length ? el.message : ''}</div>
+          <div className={s.comment__message}>{el.text?.length ? el.text : ''}</div>
         </div>
       ))}
       <div data-test-id='button-rating' className={s.comment__button}>

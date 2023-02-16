@@ -1,12 +1,23 @@
+import axios from 'axios';
+
+import { booksApi } from '../api/api-books';
 import { BookInfoI } from '../interface/book-info-i/book-info-i';
 import { ErrorResponseI } from '../interface/utils-i/utils-i';
+import { AppThunkType } from '../types/thunk-t';
+
+import { setAppStatusLoading } from './app-reducer';
+import { setBooksErrorResponse } from './books-reducer';
+
+export enum BookInfoActionType {
+  SET_BOOK = '[BookInfoActionType] SET_BOOK',
+}
 
 interface InitialStateI {
-  item: BookInfoI;
+  book: BookInfoI;
   error: ErrorResponseI | null;
 }
 const initialState: InitialStateI = {
-  item: {
+  book: {
     id: 1,
     title: 'Грокаем алгоритмы. Иллюстрированное пособие для программистов и любопытствующих',
     rating: 4.3,
@@ -68,16 +79,39 @@ const initialState: InitialStateI = {
   error: null,
 };
 
-// const slice = createSlice({
-//   name: 'books',
-//   initialState,
-//   reducers: {
-//     setBookInfoAC(state, action: PayloadAction<{ bookInfo: BookInfoI }>) {
-//       state.item = action.payload.bookInfo;
-//     },
-//   },
-// });
-//
-// export const bookInfoReducer = slice.reducer;
-//
-// export const { setBookInfoAC } = slice.actions;
+export type BookInfoActionReturnType = ReturnType<typeof setBookInfo>;
+
+export const bookInfoReducer = (state = initialState, action: BookInfoActionReturnType): InitialStateI => {
+  switch (action.type) {
+    case BookInfoActionType.SET_BOOK:
+      return {
+        ...state,
+        book: action.book,
+      };
+    default:
+      return state;
+  }
+};
+
+export const setBookInfo = (book: BookInfoI) =>
+  ({
+    type: BookInfoActionType.SET_BOOK,
+    book,
+  } as const);
+
+export const getBookInfoTC =
+  (id: string): AppThunkType =>
+  async (dispatch) => {
+    dispatch(setAppStatusLoading('loading'));
+    try {
+      const response = await booksApi.getBookInfo(id);
+
+      dispatch(setBookInfo(response.data));
+      dispatch(setAppStatusLoading('succeeded'));
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        dispatch(setBooksErrorResponse(error?.response?.data.error));
+      }
+      dispatch(setAppStatusLoading('failed'));
+    }
+  };

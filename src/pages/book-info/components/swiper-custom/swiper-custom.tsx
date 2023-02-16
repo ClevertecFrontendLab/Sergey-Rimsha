@@ -3,6 +3,7 @@ import { FreeMode, Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import book_default_lg from '../../../../assets/jpg/book_default_lg.jpg';
+import { getBookUrl } from '../../../../utils/utils';
 
 import './swiper-custom.scss';
 
@@ -15,13 +16,11 @@ import 'swiper/scss/effect-coverflow';
 import 'swiper/scss/scrollbar';
 
 interface SwiperCustomI {
-  images: string[] | undefined;
+  images: Array<{ url: string }>;
 }
 
 export const SwiperCustom = ({ images }: SwiperCustomI) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-
-  const getImage = (img: string | undefined) => (img ? img : book_default_lg);
 
   let showPagination = false;
 
@@ -43,7 +42,7 @@ export const SwiperCustom = ({ images }: SwiperCustomI) => {
         {images?.map((img, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <SwiperSlide key={index}>
-            <img className='swiperCustom__imgLg' src={getImage(img)} alt='img_book' />
+            <img className='swiperCustom__imgLg' src={getBookUrl(img) || book_default_lg} alt='img_book' />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -63,7 +62,7 @@ export const SwiperCustom = ({ images }: SwiperCustomI) => {
             {images?.map((img, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <SwiperSlide key={index}>
-                <img className='swiperCustom__img' src={getImage(img)} alt='img_book' />
+                <img className='swiperCustom__img' src={getBookUrl(img) || book_default_lg} alt='img_book' />
               </SwiperSlide>
             ))}
           </Swiper>

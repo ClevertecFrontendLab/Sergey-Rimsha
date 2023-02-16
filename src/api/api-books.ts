@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { BookI } from '../interface/book-i/book-i';
+import { BookInfoI } from '../interface/book-info-i/book-info-i';
 import { ErrorResponseI } from '../interface/utils-i/utils-i';
 
 export interface ResponseI<D> {
@@ -15,5 +16,8 @@ const instance = axios.create({
 export const booksApi = {
   getBooks() {
     return instance.get<BookI[]>('/api/books');
+  },
+  getBookInfo(id: string) {
+    return instance.get<BookInfoI>(`/api/books/${id}`);
   },
 };

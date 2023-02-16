@@ -20,21 +20,6 @@ const initialState: InitialStateI = {
   statusLoading: 'idle',
 };
 
-export const getBooksTC = (): AppThunkType => async (dispatch) => {
-  try {
-    dispatch(setAppStatusLoading('loading'));
-    const response = await booksApi.getBooks();
-
-    dispatch(setBooks(response.data));
-    dispatch(setAppStatusLoading('succeeded'));
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      dispatch(setBooksErrorResponse(error?.response?.data.error));
-    }
-    dispatch(setAppStatusLoading('failed'));
-  }
-};
-
 export enum BooksActionType {
   SET_STATUS_LOADING = '[BooksActionType] SET_STATUS_LOADING',
   SET_BOOKS = '[BooksActionType] SET_BOOKS',
@@ -85,3 +70,18 @@ export const setBooksErrorResponse = (error: ErrorResponseI) =>
     type: BooksActionType.SET_ERROR_RESPONSE,
     error,
   } as const);
+
+export const getBooksTC = (): AppThunkType => async (dispatch) => {
+  dispatch(setAppStatusLoading('loading'));
+  try {
+    const response = await booksApi.getBooks();
+
+    dispatch(setBooks(response.data));
+    dispatch(setAppStatusLoading('succeeded'));
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      dispatch(setBooksErrorResponse(error?.response?.data.error));
+    }
+    dispatch(setAppStatusLoading('failed'));
+  }
+};
