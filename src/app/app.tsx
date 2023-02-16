@@ -1,4 +1,4 @@
-import { Spinner } from '../components/spinner/spinner';
+import { ModalError, Spinner } from '../components';
 import { useAppSelector } from '../hooks/hooks';
 import { FooterPage, HeaderPage } from '../pages';
 import { Routing } from '../routing';
@@ -12,6 +12,7 @@ export const App = () => {
     <div className={s.app}>
       {statusLoading === 'loading' ? <Spinner /> : ''}
       <div className={s.app__body}>
+        <ModalError />
         <HeaderPage />
         <Routing />
       </div>

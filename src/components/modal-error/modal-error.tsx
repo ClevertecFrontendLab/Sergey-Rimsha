@@ -1,0 +1,24 @@
+import icon_close from '../../assets/icon/icon_close.svg';
+import error_icon from '../../assets/icon/icon_error.svg';
+
+import s from './modal-error.module.scss';
+
+export const ModalError = () => {
+  const title = '';
+
+  return (
+    <div className={s.modal}>
+      <div className={s.container}>
+        <div className={s.modal__box}>
+          <div className={s.modal__wrap}>
+            <img className={s.modal__image} src={error_icon} alt='error' />
+            <div className={s.modal__message}>Что-то пошло не так. Обновите страницу через некоторое время.</div>
+          </div>
+          <button className={s.modal__button} type='button'>
+            <img src={icon_close} alt='close' />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
