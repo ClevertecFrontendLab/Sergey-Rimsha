@@ -12,7 +12,7 @@ import { Comments, Description, Header, Info, Rating, SwiperCustom } from './com
 import s from './book-info-page.module.scss';
 
 export const BookInfoPage = () => {
-  const { id } = useParams();
+  const { id, category } = useParams();
   const dispatch = useAppDispatch();
 
   const book = useAppSelector<BookInfoI>((state) => state.bookInfo.book);
@@ -35,7 +35,7 @@ export const BookInfoPage = () => {
 
   return (
     <section className={s.bookInfo}>
-      <Header bookName={book.title} category={book.categories} />
+      <Header bookName={book.title} category={category} />
       <div className={classNames(s.container, { [`${s.showContent}`]: !error })}>
         <div className={s.bookInfo__content}>
           <SwiperCustom images={book?.images} />

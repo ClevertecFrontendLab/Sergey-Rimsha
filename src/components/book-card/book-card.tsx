@@ -23,7 +23,6 @@ interface BookCardI {
 
 export const BookCard = memo(({ id, title, authors, rating, image, booking, view }: BookCardI) => {
   const { category } = useParams();
-
   const showRating = (rate: number | null) => (
     <div className={s.rating}>
       {rate === null
