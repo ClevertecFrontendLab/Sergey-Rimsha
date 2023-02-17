@@ -6,8 +6,8 @@ import icon_grid_active from '../../assets/icon/icon_grid_active.svg';
 import icon_list from '../../assets/icon/icon_list.svg';
 import icon_list_active from '../../assets/icon/icon_list_active.svg';
 import { BookCard, InputSearch } from '../../components';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { getBooksTC } from '../../store/books-reducer';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getBooksTC } from '../../thunks';
 
 import s from './main-page.module.scss';
 

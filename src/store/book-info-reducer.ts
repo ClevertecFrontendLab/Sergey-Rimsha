@@ -1,16 +1,6 @@
-import axios from 'axios';
-
-import { booksApi } from '../api/api-books';
-import { BookInfoI } from '../interface/book-info-i/book-info-i';
-import { ErrorResponseI } from '../interface/utils-i/utils-i';
-import { AppThunkType } from '../types/thunk-t';
-
-import { setAppStatusLoading } from './app-reducer';
-import { setBooksErrorResponse } from './books-reducer';
-
-export enum BookInfoActionType {
-  SET_BOOK = '[BookInfoActionType] SET_BOOK',
-}
+import { BookInfoActionType } from '../enum';
+import { BookInfoI, ErrorResponseI } from '../interface';
+import { BookInfoActionReturnType } from '../types';
 
 interface InitialStateI {
   book: BookInfoI;
@@ -75,8 +65,6 @@ const initialState: InitialStateI = {
   error: null,
 };
 
-export type BookInfoActionReturnType = ReturnType<typeof setBookInfo>;
-
 export const bookInfoReducer = (state = initialState, action: BookInfoActionReturnType): InitialStateI => {
   switch (action.type) {
     case BookInfoActionType.SET_BOOK:
@@ -88,26 +76,3 @@ export const bookInfoReducer = (state = initialState, action: BookInfoActionRetu
       return state;
   }
 };
-
-export const setBookInfo = (book: BookInfoI) =>
-  ({
-    type: BookInfoActionType.SET_BOOK,
-    book,
-  } as const);
-
-export const getBookInfoTC =
-  (id: string): AppThunkType =>
-  async (dispatch) => {
-    dispatch(setAppStatusLoading('loading'));
-    try {
-      const response = await booksApi.getBookInfo(id);
-
-      dispatch(setBookInfo(response.data));
-      dispatch(setAppStatusLoading('succeeded'));
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        dispatch(setBooksErrorResponse(error?.response?.data.error));
-      }
-      dispatch(setAppStatusLoading('failed'));
-    }
-  };

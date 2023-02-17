@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { useAppSelector } from '../../hooks/hooks';
-import { CategoriesI } from '../../interface/utils-i/utils-i';
-import { Paths } from '../../routing/routing';
+import { Paths } from '../../enum';
+import { useAppSelector } from '../../hooks';
+import { CategoriesI } from '../../interface';
 
 import s from './menu.module.scss';
 
@@ -12,7 +12,7 @@ interface MenuI {
   menuType: 'sidebar' | 'burger';
 }
 
-export const Menu = React.memo(({ menuType }: MenuI) => {
+export const Menu = memo(({ menuType }: MenuI) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [selectMenuShow, setSelectMenuShow] = useState<boolean>(false);
   const categories = useAppSelector<CategoriesI[]>((state) => state.app.categories);

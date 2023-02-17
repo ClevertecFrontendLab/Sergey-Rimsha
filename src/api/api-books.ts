@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-import { BookI } from '../interface/book-i/book-i';
-import { BookInfoI } from '../interface/book-info-i/book-info-i';
-import { CategoriesI, ErrorResponseI } from '../interface/utils-i/utils-i';
+import { BookI, BookInfoI, CategoriesI, ErrorResponseI } from '../interface';
 
 export interface ResponseI<D> {
   data: D;

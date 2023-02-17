@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
 import { ModalError, Spinner } from '../components';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { FooterPage, HeaderPage } from '../pages';
 import { Routing } from '../routing';
-import { getCategories } from '../store/app-reducer';
+import { getCategoriesTC } from '../thunks';
 
 import s from './app.module.scss';
 
@@ -13,7 +13,7 @@ export const App = () => {
   const statusLoading = useAppSelector((state) => state.app.statusLoading);
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getCategoriesTC());
   }, [dispatch]);
 
   return (

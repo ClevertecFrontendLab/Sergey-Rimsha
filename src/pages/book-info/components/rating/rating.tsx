@@ -1,4 +1,4 @@
-import { getStars } from '../../../../utils/utils';
+import { getStars } from '../../../../utils';
 
 import s from './rating.module.scss';
 

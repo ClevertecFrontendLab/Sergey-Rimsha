@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
+import { setAppError } from '../../actions';
 import icon_close from '../../assets/icon/icon_close.svg';
 import error_icon from '../../assets/icon/icon_error.svg';
-import { ErrorMessage } from '../../enum/error';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { ErrorResponseI } from '../../interface/utils-i/utils-i';
-import { setAppError } from '../../store/app-reducer';
+import { ErrorMessage } from '../../enum';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { ErrorResponseI } from '../../interface';
 
 import s from './modal-error.module.scss';
 

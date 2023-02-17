@@ -3,7 +3,7 @@ import { FreeMode, Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import book_default_lg from '../../../../assets/jpg/book_default_lg.jpg';
-import { getBookUrl } from '../../../../utils/utils';
+import { getBookUrl } from '../../../../utils';
 
 import './swiper-custom.scss';
 

@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { BookInfoI } from '../../interface/book-info-i/book-info-i';
-import { getBookInfoTC } from '../../store/book-info-reducer';
-import { getDateTransformCard } from '../../utils/utils';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { BookInfoI } from '../../interface';
+import { getBookInfoTC } from '../../thunks';
+import { getDateTransformCard } from '../../utils';
 
 import { Comments, Description, Header, Info, Rating, SwiperCustom } from './components';
 
 import s from './book-info-page.module.scss';
 
 export const BookInfoPage = () => {
-  const { id, category } = useParams();
+  const { id } = useParams();
   const dispatch = useAppDispatch();
 
   const book = useAppSelector<BookInfoI>((state) => state.bookInfo.book);
@@ -33,7 +33,7 @@ export const BookInfoPage = () => {
 
   return (
     <section className={s.bookInfo}>
-      <Header bookName={book.title} category={category} />
+      <Header bookName={book.title} category={book.categories[0]} />
       <div className={s.container}>
         <div className={s.bookInfo__content}>
           <SwiperCustom images={book.images} />

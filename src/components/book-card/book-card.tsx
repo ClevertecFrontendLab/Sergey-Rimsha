@@ -1,10 +1,10 @@
-import React from 'react';
+import { memo } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 
 import book_default from '../../assets/jpg/book_defualt.jpg';
-import { BookingI } from '../../interface/book-i/book-i';
-import { Paths } from '../../routing/routing';
-import { getBookUrl, getDateTransformCard, getStars } from '../../utils/utils';
+import { Paths } from '../../enum';
+import { BookingI } from '../../interface';
+import { getBookUrl, getDateTransformCard, getStars } from '../../utils';
 import { ButtonCard } from '../button-card';
 
 import s from './book-card.module.scss';
@@ -21,7 +21,7 @@ interface BookCardI {
   booking: BookingI | null;
 }
 
-export const BookCard = React.memo(({ id, title, authors, rating, image, booking, view }: BookCardI) => {
+export const BookCard = memo(({ id, title, authors, rating, image, booking, view }: BookCardI) => {
   const { category } = useParams();
 
   const showRating = (rate: number | null) => (

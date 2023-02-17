@@ -2,7 +2,7 @@ import s from './header.module.scss';
 
 interface HeaderI {
   bookName: string | undefined;
-  category: string | undefined;
+  category: string;
 }
 
 export const Header = ({ bookName, category }: HeaderI) => (

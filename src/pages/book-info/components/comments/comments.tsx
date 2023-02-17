@@ -2,8 +2,8 @@ import { useState } from 'react';
 import classNames from 'classnames';
 
 import comment_avatar from '../../../../assets/png/comment_avatar.png';
-import { CommentI } from '../../../../interface/book-info-i/book-info-i';
-import { getBookUrl, getDataTransform, getStars } from '../../../../utils/utils';
+import { CommentI } from '../../../../interface';
+import { getBookUrl, getDataTransform, getStars } from '../../../../utils';
 
 import s from './comments.module.scss';
 
