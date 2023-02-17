@@ -1,14 +1,14 @@
 import s from './info.module.scss';
 
 interface InfoPropsI {
-  issueYear: string;
-  publish: string;
-  pages: string;
-  cover: string;
-  weight: string;
-  format: string;
-  ISBN: string;
-  producer: string;
+  issueYear?: string;
+  publish?: string;
+  pages?: string;
+  cover?: string;
+  weight?: string;
+  format?: string;
+  ISBN?: string;
+  producer?: string;
 }
 
 export const Info = ({ issueYear, publish, pages, cover, weight, format, producer, ISBN }: InfoPropsI) => (

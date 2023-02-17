@@ -1,3 +1,5 @@
+@import 'src/styles/_variables';
+
 @mixin ContainerApp() {
   max-width: 1110px;
   margin: 0 auto;
@@ -20,7 +22,7 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 28px;
-  color: #363636;
+  color: $color-dark;
 
   border-bottom: 1px solid #f9f9fa;
   padding-bottom: 16px;
@@ -44,7 +46,7 @@
     height: 24px;
     display: block;
     border: none;
-    background-color: #ffffff;
+    background-color: $color-white;
     cursor: pointer;
     position: relative;
 
@@ -56,8 +58,8 @@
       left: 7px;
       width: 10px;
       height: 10px;
-      border-right: 3px solid #363636;
-      border-top: 3px solid #363636;
+      border-right: 3px solid $color-dark;
+      border-top: 3px solid $color-dark;
       transform: rotate(135deg);
     }
 
@@ -77,5 +79,30 @@
     @media screen and (max-width: 820px) {
       background-color: #f9f9fa;
     }
+  }
+}
+
+@mixin termsContractTitle() {
+  width: 100%;
+  margin-left: 30px;
+
+  @media screen and (max-width: 820px) {
+    margin-left: 0;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: $color-dark;
+
+    @media screen and (max-width: 420px) {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+
+  &__content {
+    max-width: 825px;
   }
 }

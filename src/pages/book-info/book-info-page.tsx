@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { BookInfoI } from '../../interface';
+import { BookInfoI, ErrorResponseI } from '../../interface';
 import { getBookInfoTC } from '../../thunks';
 import { getDateTransformCard } from '../../utils';
 
@@ -15,6 +16,7 @@ export const BookInfoPage = () => {
   const dispatch = useAppDispatch();
 
   const book = useAppSelector<BookInfoI>((state) => state.bookInfo.book);
+  const error = useAppSelector<ErrorResponseI | null>((state) => state.app.error);
 
   let disabled = false;
 
@@ -33,13 +35,13 @@ export const BookInfoPage = () => {
 
   return (
     <section className={s.bookInfo}>
-      <Header bookName={book.title} category={book.categories[0]} />
-      <div className={s.container}>
+      <Header bookName={book.title} category={book.categories} />
+      <div className={classNames(s.container, { [`${s.showContent}`]: !error })}>
         <div className={s.bookInfo__content}>
-          <SwiperCustom images={book.images} />
+          <SwiperCustom images={book?.images} />
           <div className={s.bookInfo__box}>
             <div className={s.bookInfo__title}>{book.title}</div>
-            <div className={s.bookInfo__author}>{`${book.authors.join(',')}, ${book.issueYear}`}</div>
+            <div className={s.bookInfo__author}>{`${book?.authors?.join(',')}, ${book.issueYear}`}</div>
             <div className={s.bookInfo__button}>
               <button disabled={disabled} type='button'>
                 {titleBtn}

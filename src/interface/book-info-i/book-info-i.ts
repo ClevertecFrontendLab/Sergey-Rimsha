@@ -14,23 +14,23 @@ export interface CommentI {
 }
 
 export interface BookInfoI {
-  id: number;
-  title: string;
-  rating: number;
-  issueYear: string;
-  description: string;
-  publish: string;
-  pages: string;
-  cover: string;
-  weight: string;
-  format: string;
-  ISBN: string;
-  producer: string;
-  authors: string[];
-  images: [{ url: string }] | null;
-  categories: string[];
-  comments: CommentI[];
-  booking: BookingI;
-  delivery: DeliveryI;
-  histories: HistoryI[];
+  id?: number;
+  title?: string;
+  rating?: number;
+  issueYear?: string;
+  description?: string;
+  publish?: string;
+  pages?: string;
+  cover?: string;
+  weight?: string;
+  format?: string;
+  ISBN?: string;
+  producer?: string;
+  authors?: string[];
+  images?: [{ url: string }] | null;
+  categories?: string[];
+  comments?: CommentI[];
+  booking?: BookingI;
+  delivery?: DeliveryI;
+  histories?: HistoryI[];
 }

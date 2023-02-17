@@ -1,8 +1,7 @@
-import axios from 'axios';
-
 import { setAppError, setAppStatusLoading, setBookInfo } from '../actions';
 import { booksApi } from '../api';
 import { AppThunkType } from '../types';
+import { getErrorResponse } from '../utils';
 
 export const getBookInfoTC =
   (id: string): AppThunkType =>
@@ -14,9 +13,7 @@ export const getBookInfoTC =
       dispatch(setBookInfo(response.data));
       dispatch(setAppStatusLoading('succeeded'));
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        dispatch(setAppError(error?.response?.data.error));
-      }
+      dispatch(setAppError(getErrorResponse(error)));
       dispatch(setAppStatusLoading('failed'));
     }
   };

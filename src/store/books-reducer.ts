@@ -25,10 +25,12 @@ export const booksReducer = (state = initialState, action: BooksActionReturnType
       return {
         ...state,
         items: action.books,
+        error: null,
       };
     case BooksActionType.SET_ERROR_RESPONSE:
       return {
         ...state,
+        items: [],
         error: action.error,
       };
     default:

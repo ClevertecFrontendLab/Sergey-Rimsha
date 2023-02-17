@@ -3,6 +3,11 @@
 
 .container {
   @include ContainerApp();
+  display: none;
+}
+
+.showContent {
+  display: block;
 }
 
 .bookInfo {
@@ -49,7 +54,7 @@
     font-size: 32px;
     line-height: 40px;
     letter-spacing: 0.1px;
-    color: #363636;
+    color: $color-dark;
 
     @media screen and (max-width: 820px) {
       font-size: 24px;
@@ -69,7 +74,7 @@
     font-size: 18px;
     line-height: 28px;
     letter-spacing: 0.1px;
-    color: #a7a7a7;
+    color: $color-grey-a7;
 
     @media screen and (max-width: 820px) {
       font-weight: 600;
@@ -104,7 +109,7 @@
       display: block;
       width: 100%;
       height: 100%;
-      background: linear-gradient(231.58deg, #f83600 -53.35%, #f9d423 297.76%);
+      background: $color-btn-hover;
       border-radius: 30px;
       border: none;
 
@@ -126,9 +131,9 @@
       }
 
       &:disabled {
-        color: #a7a7a7;
+        color: $color-grey-a7;
         background: #f9f9fa;
-        border: 1px solid #bfc4c9;
+        border: 1px solid $color-grey-bf;
         border-radius: 30px;
       }
 

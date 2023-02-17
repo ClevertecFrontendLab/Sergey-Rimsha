@@ -1,8 +1,7 @@
-import axios from 'axios';
-
 import { setAppCategories, setAppError, setAppStatusLoading } from '../actions';
 import { booksApi } from '../api';
 import { AppThunkType } from '../types';
+import { getErrorResponse } from '../utils';
 
 export const getCategoriesTC = (): AppThunkType => async (dispatch) => {
   dispatch(setAppStatusLoading('loading'));
@@ -12,9 +11,7 @@ export const getCategoriesTC = (): AppThunkType => async (dispatch) => {
     dispatch(setAppCategories(response.data));
     dispatch(setAppStatusLoading('succeeded'));
   } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      dispatch(setAppError(error?.response?.data.error));
-    }
+    dispatch(setAppError(getErrorResponse(error)));
     dispatch(setAppStatusLoading('failed'));
   }
 };

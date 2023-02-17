@@ -1,5 +1,9 @@
+import axios from 'axios';
+
 import star from '../assets/icon/icon_star.svg';
 import star_active from '../assets/icon/icon_star_active.svg';
+import { ErrorMessage } from '../enum';
+import { ErrorResponseI } from '../interface';
 
 export const getStars = (ratingValue: number) => {
   const stars = [];
@@ -50,4 +54,22 @@ export const getBookUrl = (img: { url: string } | null) => {
   }
 
   return '';
+};
+
+export const getErrorResponse = (error: unknown): ErrorResponseI => {
+  if (axios.isAxiosError(error)) {
+    return {
+      status: 1,
+      name: 'error',
+      message: ErrorMessage.MESSAGE,
+      details: {},
+    };
+  }
+
+  return {
+    status: 1,
+    name: 'error',
+    message: ErrorMessage.MESSAGE,
+    details: {},
+  };
 };

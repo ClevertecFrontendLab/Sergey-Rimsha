@@ -2,7 +2,7 @@ import s from './description.module.scss';
 
 interface DescriptionI {
   showOnly: 'lg' | 'md';
-  description: string;
+  description?: string;
 }
 
 export const Description = ({ showOnly, description }: DescriptionI) => {

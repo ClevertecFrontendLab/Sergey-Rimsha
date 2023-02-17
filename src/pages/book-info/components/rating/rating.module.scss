@@ -55,12 +55,12 @@
     font-weight: 700;
     font-size: 18px;
     line-height: 28px;
-    color: #363636;
+    color: $color-dark;
     margin-left: 26px;
   }
 
   &__message {
-    color: #363636;
+    color: $color-dark;
     margin-left: 26px;
 
     @media screen and (max-width: 420px) {

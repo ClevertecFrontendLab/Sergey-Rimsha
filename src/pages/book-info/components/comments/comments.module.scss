@@ -25,7 +25,7 @@
     font-size: 14px;
     line-height: 24px;
     letter-spacing: 0.1px;
-    color: #a7a7a7;
+    color: $color-grey-a7;
     margin-top: 2px;
     margin-left: 6px;
   }
@@ -47,7 +47,7 @@
     align-items: center;
     font-size: 16px;
     line-height: 24px;
-    color: #727272;
+    color: $color-grey;
   }
 
   &__img {
@@ -96,7 +96,7 @@
     margin-top: 19px;
     font-size: 16px;
     line-height: 24px;
-    color: #363636;
+    color: $color-dark;
 
     @media screen and (max-width: 420px) {
       font-size: 15px;
@@ -128,9 +128,9 @@
       line-height: 150%;
       letter-spacing: 0.2px;
       text-transform: uppercase;
-      color: #ffffff;
+      color: $color-white;
 
-      background: linear-gradient(233.73deg, #f83600 -16.08%, #f9d423 327.37%);
+      background: $color-btn-pressed;
       border-radius: 30px;
       border: none;
       cursor: pointer;

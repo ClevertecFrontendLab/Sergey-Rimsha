@@ -1,3 +1,3 @@
-import { setBookInfo } from '../../actions';
+import { setBookInfo, setBookInfoError } from '../../actions';
 
-export type BookInfoActionReturnType = ReturnType<typeof setBookInfo>;
+export type BookInfoActionReturnType = ReturnType<typeof setBookInfo> | ReturnType<typeof setBookInfoError>;

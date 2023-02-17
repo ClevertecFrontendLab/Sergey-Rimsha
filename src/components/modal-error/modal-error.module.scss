@@ -17,12 +17,11 @@
     border: 1.5px solid #f42c4f;
     border-radius: 5px;
     position: absolute;
-    top: -400px;
+    top: -300px;
     z-index: 101;
     padding: 0 32px;
 
     transition: 0.5s;
-
 
     @media screen and (max-width: 560px) {
       align-items: start;
@@ -66,7 +65,7 @@
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0.1px;
-    color: #363636;
+    color: $color-dark;
     margin-left: 24px;
 
     @media screen and (max-width: 860px) {

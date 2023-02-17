@@ -1,3 +1,6 @@
+@import 'src/styles/_variables';
+@import 'src/styles/_mixins';
+
 .input {
   width: 350px;
   height: 38px;
@@ -18,7 +21,7 @@
     margin-left: 17px;
     margin-right: 10px;
     border: none;
-    background-color: #ffffff;
+    background-color: $color-white;
 
     @media screen and (max-width: 640px) {
       position: absolute;
@@ -45,7 +48,7 @@
           0 1px 5px rgba(191, 196, 201, 0.24);
         border-radius: 25px;
         padding-right: 11px;
-        background-color: #ffffff;
+        background-color: $color-white;
       }
     }
   }
@@ -55,8 +58,8 @@
     height: 100%;
     font-size: 14px;
     line-height: 18px;
-    color: #a7a7a7;
-    background: #ffffff;
+    color: $color-grey-a7;
+    background: $color-white;
     border: 0;
     -webkit-appearance: none;
     outline: none;
@@ -78,7 +81,7 @@
     display: none;
     position: relative;
     border: none;
-    background-color: #ffffff;
+    background-color: $color-white;
 
     margin-right: 11px;
 
