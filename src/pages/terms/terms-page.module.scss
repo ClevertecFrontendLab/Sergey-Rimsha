@@ -1,0 +1,36 @@
+@import 'src/styles/_variables';
+@import 'src/styles/_mixins';
+
+.terms {
+  @include termsContractTitle();
+
+  &__subTitle {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: $color-dark;
+
+    margin-top: 32px;
+
+    @media screen and (max-width: 420px) {
+      margin-top: 24px;
+    }
+  }
+
+  &__group {
+    margin-left: 30px;
+  }
+
+  &__item {
+    font-size: 16px;
+    line-height: 24px;
+    color: $color-dark;
+
+    @media screen and (max-width: 420px) {
+      font-size: 15px;
+      line-height: 20px;
+    }
+
+    margin-top: 16px;
+  }
+}

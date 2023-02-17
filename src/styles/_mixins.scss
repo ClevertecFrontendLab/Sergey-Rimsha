@@ -1,0 +1,108 @@
+@import 'src/styles/_variables';
+
+@mixin ContainerApp() {
+  max-width: 1110px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 820px) {
+    max-width: 640px;
+  }
+
+  @media screen and (max-width: 640px) {
+    max-width: 420px;
+  }
+
+  @media screen and (max-width: 420px) {
+    max-width: 288px;
+  }
+}
+
+@mixin SubTitleBookInfo() {
+  max-width: 350px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  color: $color-dark;
+
+  border-bottom: 1px solid #f9f9fa;
+  padding-bottom: 16px;
+
+  @media screen and (max-width: 820px) {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  @media screen and (max-width: 420px) {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+@mixin ArrowButton() {
+  .arrow {
+    width: 24px;
+    height: 24px;
+    display: block;
+    border: none;
+    background-color: $color-white;
+    cursor: pointer;
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 7px;
+      left: 7px;
+      width: 10px;
+      height: 10px;
+      border-right: 3px solid $color-dark;
+      border-top: 3px solid $color-dark;
+      transform: rotate(135deg);
+    }
+
+    &_active {
+      &:before {
+        border-right: 3px solid #f88211;
+        border-top: 3px solid #f88211;
+      }
+    }
+
+    &_show {
+      &:before {
+        transform: rotate(315deg);
+      }
+    }
+
+    @media screen and (max-width: 820px) {
+      background-color: #f9f9fa;
+    }
+  }
+}
+
+@mixin termsContractTitle() {
+  width: 100%;
+  margin-left: 30px;
+
+  @media screen and (max-width: 820px) {
+    margin-left: 0;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: $color-dark;
+
+    @media screen and (max-width: 420px) {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+
+  &__content {
+    max-width: 825px;
+  }
+}
