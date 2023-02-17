@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { BookI } from '../interface/book-i/book-i';
 import { BookInfoI } from '../interface/book-info-i/book-info-i';
-import { ErrorResponseI } from '../interface/utils-i/utils-i';
+import { CategoriesI, ErrorResponseI } from '../interface/utils-i/utils-i';
 
 export interface ResponseI<D> {
   data: D;
@@ -19,5 +19,8 @@ export const booksApi = {
   },
   getBookInfo(id: string) {
     return instance.get<BookInfoI>(`/api/books/${id}`);
+  },
+  getCategories() {
+    return instance.get<CategoriesI[]>('/api/categories');
   },
 };

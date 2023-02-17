@@ -3,16 +3,16 @@
 
 .showOnly {
   &__lg {
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 840px) {
       display: none;
     }
   }
 
   &__md {
-    @media screen and (min-width: 640px) {
+    @media screen and (min-width: 840px) {
       display: none;
     }
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 840px) {
       display: block;
     }
   }
@@ -34,22 +34,19 @@
   }
 
   &__text {
+    height: 100%;
     margin-top: 16px;
 
-    & p {
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 24px;
-      letter-spacing: 0.1px;
-      color: #363636;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.1px;
+    color: #363636;
+    white-space: pre-wrap;
 
-      @media screen and (max-width: 420px) {
-        font-size: 12px;
-        line-height: 18px;
-      }
-      &:last-child {
-        margin-top: 32px;
-      }
+    @media screen and (max-width: 420px) {
+      font-size: 12px;
+      line-height: 18px;
     }
   }
 }

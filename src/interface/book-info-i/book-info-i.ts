@@ -27,7 +27,7 @@ export interface BookInfoI {
   ISBN: string;
   producer: string;
   authors: string[];
-  images: [{ url: string }];
+  images: [{ url: string }] | null;
   categories: string[];
   comments: CommentI[];
   booking: BookingI;

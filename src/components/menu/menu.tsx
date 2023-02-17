@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
+import { useAppSelector } from '../../hooks/hooks';
+import { CategoriesI } from '../../interface/utils-i/utils-i';
 import { Paths } from '../../routing/routing';
 
 import s from './menu.module.scss';
@@ -10,26 +12,10 @@ interface MenuI {
   menuType: 'sidebar' | 'burger';
 }
 
-const arrItems: Array<{ title: string; value: number }> = [
-  { title: 'Бизнес-книги', value: 14 },
-  { title: 'Детективы', value: 8 },
-  { title: 'Детские книги', value: 14 },
-  { title: 'Зарубежная литература', value: 2 },
-  { title: 'История', value: 5 },
-  { title: 'Классическая литература', value: 12 },
-  { title: 'Книги по психологии', value: 11 },
-  { title: 'Компьютерная литература', value: 54 },
-  { title: 'Культура и искусство', value: 5 },
-  { title: 'Наука и образование', value: 2 },
-  { title: 'Публицистическая литература', value: 0 },
-  { title: 'Справочники', value: 10 },
-  { title: 'Фантастика', value: 12 },
-  { title: 'Юмористическая литература', value: 8 },
-];
-
-export const Menu = ({ menuType }: MenuI) => {
+export const Menu = React.memo(({ menuType }: MenuI) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [selectMenuShow, setSelectMenuShow] = useState<boolean>(false);
+  const categories = useAppSelector<CategoriesI[]>((state) => state.app.categories);
 
   const clickMenuRef = useRef<HTMLDivElement>(null);
 
@@ -97,10 +83,14 @@ export const Menu = ({ menuType }: MenuI) => {
             to={`${Paths.BOOKS}/all`}>
             Все книги
           </NavLink>
-          {arrItems.map((item) => (
-            <NavLink onClick={onClickHandlerMenu} className={styleLink} key={item.title} to='/'>
-              <span className={s.link__title}>{item.title}</span>
-              <span className={s.link__value}>{item.value}</span>
+          {categories.map((item) => (
+            <NavLink
+              onClick={onClickHandlerMenu}
+              className={styleLink}
+              key={item.id}
+              to={`${Paths.BOOKS}/${item.path}`}>
+              <span className={s.link__title}>{item.name}</span>
+              <span className={s.link__value}>{item.id}</span>
             </NavLink>
           ))}
         </div>
@@ -125,17 +115,19 @@ export const Menu = ({ menuType }: MenuI) => {
         <span className={s.menu__second}>{}</span>
         <span className={s.menu__third}>{}</span>
       </button>
-      <div
-        data-test-id='burger-navigation'
-        className={classNames(`${s.menu__content}`, { [`${s.menu__content_show}`]: showMenu })}>
-        <div className={s.menu__box}>{sidebarMenu()}</div>
-        <div className={s.footer}>
-          <div className={s.footer__item}>Профиль</div>
-          <div className={s.footer__item}>Выход</div>
+      <div className={s.container}>
+        <div
+          data-test-id='burger-navigation'
+          className={classNames(`${s.menu__content}`, { [`${s.menu__content_show}`]: showMenu })}>
+          <div className={s.menu__box}>{sidebarMenu()}</div>
+          <div className={s.footer}>
+            <div className={s.footer__item}>Профиль</div>
+            <div className={s.footer__item}>Выход</div>
+          </div>
         </div>
       </div>
     </div>
   );
 
   return menuType === 'sidebar' ? sidebarMenu() : burgerMenu();
-};
+});

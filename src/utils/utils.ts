@@ -28,6 +28,20 @@ export const getDateTransformCard = (data: string) => {
   return `занято до ${reformat(day)}.${reformat(mount)}`;
 };
 
+export const getDataTransform = (data: string) => {
+  const dataNew = new Date(data);
+
+  const options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return dataNew.toLocaleString('ru', options);
+};
+
 export const getBookUrl = (img: { url: string } | null) => {
   const BaseUrl = 'https://strapi.cleverland.by';
 

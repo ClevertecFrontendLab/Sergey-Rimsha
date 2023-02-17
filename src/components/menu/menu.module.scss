@@ -1,6 +1,11 @@
 @import 'src/styles/_mixins';
 @import 'src/styles/_variables';
 
+.container {
+  @include ContainerApp();
+  position: relative;
+}
+
 .menu {
   @media screen and (min-width: 820px) {
     display: none;
@@ -35,7 +40,7 @@
           -webkit-transform: rotate(45deg);
           top: 8px;
 
-          @media screen and (max-width: 420px) {
+          @media screen and (max-width: 620px) {
             top: 6px;
           }
         }
@@ -62,7 +67,7 @@
   &__content {
     position: absolute;
     width: 502px;
-    top: 94px;
+    top: 18px;
     left: -1000px;
     z-index: 100;
     background: #f9f9fa;
@@ -73,16 +78,11 @@
     border-radius: 10px;
 
     &_show {
-      left: 64px;
-
-      @media screen and (max-width: 420px) {
-        left: 16px;
-      }
+      left: 0;
     }
 
-    @media screen and (max-width: 420px) {
+    @media screen and (max-width: 640px) {
       width: 288px;
-      top: 76px;
     }
   }
 
@@ -90,7 +90,7 @@
     margin: 32px 0 52px 32px;
     max-width: 255px;
 
-    @media screen and (max-width: 420px) {
+    @media screen and (max-width: 640px) {
       margin: 16px 16px 52px 16px;
     }
   }
@@ -100,7 +100,7 @@
   border-top: 1px solid #bfc4c9;
   padding: 0 32px;
 
-  @media screen and (max-width: 420px) {
+  @media screen and (max-width: 620px) {
     padding: 0 16px;
   }
 

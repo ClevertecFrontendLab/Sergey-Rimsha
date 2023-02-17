@@ -1,12 +1,20 @@
+import { useEffect } from 'react';
+
 import { ModalError, Spinner } from '../components';
-import { useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { FooterPage, HeaderPage } from '../pages';
 import { Routing } from '../routing';
+import { getCategories } from '../store/app-reducer';
 
 import s from './app.module.scss';
 
 export const App = () => {
+  const dispatch = useAppDispatch();
   const statusLoading = useAppSelector((state) => state.app.statusLoading);
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
   return (
     <div className={s.app}>

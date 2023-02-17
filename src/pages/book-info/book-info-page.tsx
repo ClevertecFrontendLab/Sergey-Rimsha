@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { BookInfoI } from '../../interface/book-info-i/book-info-i';
 import { getBookInfoTC } from '../../store/book-info-reducer';
-import { cards } from '../main/main-page';
+import { getDateTransformCard } from '../../utils/utils';
 
 import { Comments, Description, Header, Info, Rating, SwiperCustom } from './components';
 
@@ -16,19 +16,14 @@ export const BookInfoPage = () => {
 
   const book = useAppSelector<BookInfoI>((state) => state.bookInfo.book);
 
-  // const card = cards.find((element) => element.id === id);
+  let disabled = false;
 
-  const disabled = false;
+  let titleBtn = 'Забронировать';
 
-  const titleBtn = 'Забронировать';
-
-  // if (card?.booking.status === 'open') {
-  //   titleBtn = 'Забронировать';
-  // } else if (card?.booking.status === 'complete') {
-  //   titleBtn = 'Забронирована';
-  // } else {
-  //   disabled = true;
-  // }
+  if (book.booking?.order) {
+    titleBtn = getDateTransformCard(book.booking.dateOrder);
+    disabled = true;
+  }
 
   useEffect(() => {
     if (id) {
@@ -44,7 +39,7 @@ export const BookInfoPage = () => {
           <SwiperCustom images={book.images} />
           <div className={s.bookInfo__box}>
             <div className={s.bookInfo__title}>{book.title}</div>
-            <div className={s.bookInfo__author}>{book.authors[0]}</div>
+            <div className={s.bookInfo__author}>{`${book.authors.join(',')}, ${book.issueYear}`}</div>
             <div className={s.bookInfo__button}>
               <button disabled={disabled} type='button'>
                 {titleBtn}
@@ -55,7 +50,16 @@ export const BookInfoPage = () => {
         </div>
         <Description description={book.description} showOnly='md' />
         <Rating ratingValue={book.rating} />
-        <Info />
+        <Info
+          issueYear={book.issueYear}
+          pages={book.pages}
+          publish={book.publish}
+          cover={book.cover}
+          weight={book.weight}
+          format={book.format}
+          ISBN={book.ISBN}
+          producer={book.producer}
+        />
         <Comments comments={book.comments} />
       </div>
     </section>

@@ -4,3 +4,9 @@ export interface ErrorResponseI {
   message: string;
   details: object;
 }
+
+export interface CategoriesI {
+  id: number;
+  name: string;
+  path: string;
+}

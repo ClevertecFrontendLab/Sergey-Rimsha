@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import comment_avatar from '../../../../assets/png/comment_avatar.png';
 import { CommentI } from '../../../../interface/book-info-i/book-info-i';
-import { getStars } from '../../../../utils/utils';
+import { getBookUrl, getDataTransform, getStars } from '../../../../utils/utils';
 
 import s from './comments.module.scss';
 
@@ -34,11 +34,14 @@ export const Comments = ({ comments = [] }: CommentsI) => {
       {comments?.map((el) => (
         <div key={el.id} className={classNames(s.comment__content, { [`${s.comment__content_show}`]: !showComments })}>
           <div className={s.comment__wrap}>
-            <img className={s.comment__img} src={comment_avatar} alt='avatar' />
+            <img
+              className={s.comment__img}
+              src={getBookUrl({ url: el.user.avatarUrl }) && comment_avatar}
+              alt='avatar'
+            />
             <div className={s.comment__block}>
-              <div className={s.comment__name}>{el.user.firstName}</div>
-              {/* add last name */}
-              <div className={s.comment__date}>{el.createdAt}</div>
+              <div className={s.comment__name}>{`${el.user.firstName} ${el.user.lastName}`}</div>
+              <div className={s.comment__date}>{getDataTransform(el.createdAt)}</div>
             </div>
           </div>
           <div className={s.comment__rating}>

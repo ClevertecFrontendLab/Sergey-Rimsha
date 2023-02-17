@@ -32,11 +32,7 @@ const initialState: InitialStateI = {
     ISBN: '978-5-4461-0923-4',
     producer: 'ООО «Питер Мейл». РФ, 198 206, г. Санкт-Петербург, Петергофское ш, д. 73, лит. А29',
     authors: ['Адитья Бхаргава'],
-    images: [
-      {
-        url: '/uploads/image_book_5e25f0be0d.jpg',
-      },
-    ],
+    images: null,
     categories: ['Зарубежная литература', 'Компьютерная литература'],
     comments: [
       {

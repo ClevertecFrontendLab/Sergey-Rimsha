@@ -16,7 +16,7 @@ import 'swiper/scss/effect-coverflow';
 import 'swiper/scss/scrollbar';
 
 interface SwiperCustomI {
-  images: Array<{ url: string }>;
+  images: Array<{ url: string }> | null;
 }
 
 export const SwiperCustom = ({ images }: SwiperCustomI) => {
