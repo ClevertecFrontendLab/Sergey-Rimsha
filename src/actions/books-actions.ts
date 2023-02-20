@@ -19,3 +19,9 @@ export const setBooksErrorResponse = (error: ErrorResponseI) =>
     type: BooksActionType.SET_ERROR_RESPONSE,
     error,
   } as const);
+
+export const setBooksSortRating = (sort: boolean) =>
+  ({
+    type: BooksActionType.SET_SORT_RATING,
+    sort,
+  } as const);

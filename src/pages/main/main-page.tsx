@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 
-import icon_filter from '../../assets/icon/icon_filter_lg.svg';
+import { setBooksSortRating } from '../../actions';
+import i_filter from '../../assets/icon/icon_filter_lg.svg';
+import i_filter_revers from '../../assets/icon/icon_filter_revers.svg';
 import icon_grid from '../../assets/icon/icon_grid.svg';
 import icon_grid_active from '../../assets/icon/icon_grid_active.svg';
 import icon_list from '../../assets/icon/icon_list.svg';
 import icon_list_active from '../../assets/icon/icon_list_active.svg';
 import { BookCard, InputSearch } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { BookI } from '../../interface';
 import { getBooksTC } from '../../thunks';
 
 import s from './main-page.module.scss';
@@ -19,10 +22,15 @@ export const MainPage = () => {
 
   const [contentView, setContentView] = useState(`${s.main__content_grid}`);
 
-  const items = useAppSelector((state) => state.books.items);
+  const items = useAppSelector<BookI[]>((state) => state.books.items);
+  const sort = useAppSelector<boolean>((state) => state.books.sort);
 
   const onClickView = () => {
     setViewCards((prevState) => (prevState === 'GRID' ? 'LIST' : 'GRID'));
+  };
+
+  const onClickHandlerSortRating = () => {
+    dispatch(setBooksSortRating(!sort));
   };
 
   useEffect(() => {
@@ -50,8 +58,8 @@ export const MainPage = () => {
         <form className={s.from}>
           <InputSearch />
           <div className={s.from__filter}>
-            <button type='button'>
-              <img src={icon_filter} alt='sort' />
+            <button onClick={onClickHandlerSortRating} type='button'>
+              <img src={sort ? i_filter : i_filter_revers} alt='sort' />
               <span>По рейтингу</span>
             </button>
           </div>

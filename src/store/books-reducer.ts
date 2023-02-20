@@ -6,12 +6,14 @@ interface InitialStateI {
   items: BookI[];
   error: ErrorResponseI | null;
   statusLoading: StatusLoading;
+  sort: boolean;
 }
 
 const initialState: InitialStateI = {
   items: [],
   error: null,
   statusLoading: 'idle',
+  sort: true,
 };
 
 export const booksReducer = (state = initialState, action: BooksActionReturnType): InitialStateI => {
@@ -32,6 +34,12 @@ export const booksReducer = (state = initialState, action: BooksActionReturnType
         ...state,
         items: [],
         error: action.error,
+      };
+    case BooksActionType.SET_SORT_RATING:
+      return {
+        ...state,
+        items: [...state.items.reverse()],
+        sort: action.sort,
       };
     default:
       return state;

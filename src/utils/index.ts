@@ -1,1 +1,8 @@
-export { getDateTransformCard, getBookUrl, getDataTransform, getStars, getErrorResponse } from './utils';
+export {
+  getDateTransformCard,
+  sortBooksRatingDefault,
+  getBookUrl,
+  getDataTransform,
+  getStars,
+  getErrorResponse,
+} from './utils';
