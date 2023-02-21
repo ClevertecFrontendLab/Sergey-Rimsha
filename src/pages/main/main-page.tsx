@@ -37,17 +37,12 @@ export const MainPage = () => {
 
   if (filter) {
     books = items.filter((book) => book.categories.find((name) => name === filter.name));
-    // books = items.filter((book) => book.categories.find((name) => name === filter.name));
   }
   if (search) {
     books = books.filter((item) => {
       const matchValue = search.toLowerCase();
 
-      if (item.title.toLowerCase().includes(matchValue)) {
-        return true;
-      }
-
-      return false;
+      return item.title.toLowerCase().includes(matchValue);
     });
   }
 
@@ -61,7 +56,22 @@ export const MainPage = () => {
 
   const onChangeSearchInput = (text: string) => {
     setSearch(text);
-    console.log(text);
+  };
+
+  const emptyDataText = () => {
+    if (search.length >= 1) {
+      return (
+        <div className={s.main__message} data-test-id='search-result-not-found'>
+          По запросу ничего не найдено
+        </div>
+      );
+    }
+
+    return (
+      <div className={s.main__message} data-test-id='empty-category'>
+        В этой категории книг ещё нет
+      </div>
+    );
   };
 
   useEffect(() => {
@@ -88,7 +98,7 @@ export const MainPage = () => {
       <div className={s.main__header}>
         <form className={s.from}>
           <InputSearch search={search} onChangeSearchInput={onChangeSearchInput} />
-          <div className={s.from__filter}>
+          <div data-test-id='sort-rating-button' className={s.from__filter}>
             <button onClick={onClickHandlerSortRating} type='button'>
               <img src={sort ? i_filter : i_filter_revers} alt='sort' />
               <span>По рейтингу</span>
@@ -105,23 +115,21 @@ export const MainPage = () => {
         </div>
       </div>
       <div className={classNames(s.main__content, { [`${contentView}`]: books.length >= 1 })}>
-        {books.length >= 1 ? (
-          books.map((card) => (
-            <BookCard
-              key={card.id}
-              id={card.id}
-              view={viewCards}
-              authors={card.authors}
-              title={card.title}
-              booking={card.booking}
-              image={card.image}
-              rating={card.rating}
-              search={search}
-            />
-          ))
-        ) : (
-          <div className={s.main__message}>В этой категории книг ещё нет</div>
-        )}
+        {books.length >= 1
+          ? books.map((card) => (
+              <BookCard
+                key={card.id}
+                id={card.id}
+                view={viewCards}
+                authors={card.authors}
+                title={card.title}
+                booking={card.booking}
+                image={card.image}
+                rating={card.rating}
+                search={search}
+              />
+            ))
+          : emptyDataText()}
       </div>
     </section>
   );

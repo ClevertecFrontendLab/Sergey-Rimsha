@@ -40,7 +40,9 @@ export const BookInfoPage = () => {
         <div className={s.bookInfo__content}>
           <SwiperCustom images={book?.images} />
           <div className={s.bookInfo__box}>
-            <div className={s.bookInfo__title}>{book.title}</div>
+            <div data-test-id='book-title' className={s.bookInfo__title}>
+              {book.title}
+            </div>
             <div className={s.bookInfo__author}>{`${book?.authors?.join(',')}, ${book.issueYear}`}</div>
             <div className={s.bookInfo__button}>
               <button disabled={disabled} type='button'>

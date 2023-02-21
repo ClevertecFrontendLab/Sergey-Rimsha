@@ -14,7 +14,7 @@ interface MenuI {
 
 export const Menu = memo(({ menuType }: MenuI) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const [selectMenuShow, setSelectMenuShow] = useState<boolean>(false);
+  const [selectMenuShow, setSelectMenuShow] = useState<boolean>(true);
   const categories = useAppSelector<CategoriesI[]>((state) => state.app.categories);
 
   const clickMenuRef = useRef<HTMLDivElement>(null);
@@ -58,6 +58,8 @@ export const Menu = memo(({ menuType }: MenuI) => {
   const testBooks = menuType === 'sidebar' ? 'navigation-showcase' : 'burger-showcase';
   const testTerms = menuType === 'sidebar' ? 'navigation-terms' : 'burger-terms';
   const testContract = menuType === 'sidebar' ? 'navigation-contract' : 'burger-contract';
+  const testLink = menuType === 'sidebar' ? 'navigation-' : 'burger-';
+  const testLinkValue = menuType === 'sidebar' ? 'navigation-book-count-for-' : 'burger-book-count-for-';
 
   const styleTitle = ({ isActive }: { isActive: boolean }) =>
     classNames(
@@ -85,12 +87,15 @@ export const Menu = memo(({ menuType }: MenuI) => {
           </NavLink>
           {categories.map((item) => (
             <NavLink
+              data-test-id={`${testLink}${item.path}`}
               onClick={onClickHandlerMenu}
               className={styleLink}
               key={item.id}
               to={`${Paths.BOOKS}/${item.path}`}>
               <span className={s.link__title}>{item.name}</span>
-              <span className={s.link__value}>{item.value}</span>
+              <span data-test-id={`${testLinkValue}${item.path}`} className={s.link__value}>
+                {item.value}
+              </span>
             </NavLink>
           ))}
         </div>
