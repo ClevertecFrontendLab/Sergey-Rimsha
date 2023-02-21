@@ -3,7 +3,7 @@ import axios from 'axios';
 import star from '../assets/icon/icon_star.svg';
 import star_active from '../assets/icon/icon_star_active.svg';
 import { ErrorMessage } from '../enum';
-import { BookI, ErrorResponseI } from '../interface';
+import { BookI, CategoriesI, ErrorResponseI } from '../interface';
 
 export const getStars = (ratingValue: number) => {
   const stars = [];
@@ -88,4 +88,23 @@ export const sortBooksRatingDefault = (books: BookI[]): BookI[] => {
   });
 
   return [...booksRating, ...booksNotRating];
+};
+
+export const getValueCategories = (books: BookI[], categories: CategoriesI[]): CategoriesI[] => {
+  const valueCategories: { [n: string]: number } = {};
+
+  categories.forEach((el) => {
+    valueCategories[el.name] = 0;
+  });
+
+  books.forEach((book) => {
+    book.categories.forEach((key) => {
+      valueCategories[key] += 1;
+    });
+  });
+
+  return categories.map((el) => ({
+    ...el,
+    value: valueCategories[el.name],
+  }));
 };

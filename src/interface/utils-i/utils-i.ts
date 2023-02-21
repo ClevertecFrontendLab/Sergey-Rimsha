@@ -9,4 +9,5 @@ export interface CategoriesI {
   id: number;
   name: string;
   path: string;
+  value?: number;
 }

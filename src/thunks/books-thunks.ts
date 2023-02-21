@@ -1,15 +1,15 @@
-import { setAppError, setAppStatusLoading, setBooks, setBooksErrorResponse } from '../actions';
+import { setAppCategories, setAppError, setAppStatusLoading, setBooks, setBooksErrorResponse } from '../actions';
 import { booksApi } from '../api';
 import { AppThunkType } from '../types';
-import { getErrorResponse, sortBooksRatingDefault } from '../utils';
+import { getErrorResponse, getValueCategories, sortBooksRatingDefault } from '../utils';
 
-export const getBooksTC = (): AppThunkType => async (dispatch) => {
+export const getBooksTC = (): AppThunkType => async (dispatch, getState) => {
   dispatch(setAppStatusLoading('loading'));
   try {
     const response = await booksApi.getBooks();
 
     dispatch(setBooks(sortBooksRatingDefault(response.data)));
-
+    dispatch(setAppCategories(getValueCategories(response.data, getState().app.categories)));
     dispatch(setAppStatusLoading('succeeded'));
   } catch (error: unknown) {
     dispatch(setAppError(getErrorResponse(error)));

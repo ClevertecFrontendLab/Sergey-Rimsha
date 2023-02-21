@@ -90,7 +90,7 @@ export const Menu = memo(({ menuType }: MenuI) => {
               key={item.id}
               to={`${Paths.BOOKS}/${item.path}`}>
               <span className={s.link__title}>{item.name}</span>
-              <span className={s.link__value}>{item.id}</span>
+              <span className={s.link__value}>{item.value}</span>
             </NavLink>
           ))}
         </div>
