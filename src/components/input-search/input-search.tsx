@@ -5,8 +5,13 @@ import icon_search from '../../assets/icon/icon_search.svg';
 
 import s from './input-search.module.scss';
 
-export const InputSearch = () => {
-  const [search, setSearch] = useState('');
+interface InputSearchPropsI {
+  search: string;
+  onChangeSearchInput: (text: string) => void;
+}
+
+export const InputSearch = ({ search, onChangeSearchInput }: InputSearchPropsI) => {
+  // const [search, setSearch] = useState('');
   const [focusInput, setFocusInput] = useState<boolean>(false);
 
   const onHandlerClickInput = () => {
@@ -14,7 +19,7 @@ export const InputSearch = () => {
   };
 
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.currentTarget.value);
+    onChangeSearchInput(e.currentTarget.value);
   };
 
   const onFocusInput = () => {
@@ -22,7 +27,7 @@ export const InputSearch = () => {
   };
 
   const onHandlerClearInput = () => {
-    setSearch('');
+    // setSearch('');
     setFocusInput(false);
   };
 

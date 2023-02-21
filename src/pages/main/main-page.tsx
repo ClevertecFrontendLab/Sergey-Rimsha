@@ -25,6 +25,8 @@ export const MainPage = () => {
 
   const [contentView, setContentView] = useState(`${s.main__content_grid}`);
 
+  const [search, setSearch] = useState<string>('');
+
   const items = useAppSelector<BookI[]>((state) => state.books.items);
   const sort = useAppSelector<boolean>((state) => state.books.sort);
   const categories = useAppSelector<CategoriesI[]>((state) => state.app.categories);
@@ -35,6 +37,18 @@ export const MainPage = () => {
 
   if (filter) {
     books = items.filter((book) => book.categories.find((name) => name === filter.name));
+    // books = items.filter((book) => book.categories.find((name) => name === filter.name));
+  }
+  if (search) {
+    books = books.filter((item) => {
+      const matchValue = search.toLowerCase();
+
+      if (item.title.toLowerCase().includes(matchValue)) {
+        return true;
+      }
+
+      return false;
+    });
   }
 
   const onClickView = () => {
@@ -43,6 +57,11 @@ export const MainPage = () => {
 
   const onClickHandlerSortRating = () => {
     dispatch(setBooksSortRating(!sort));
+  };
+
+  const onChangeSearchInput = (text: string) => {
+    setSearch(text);
+    console.log(text);
   };
 
   useEffect(() => {
@@ -68,7 +87,7 @@ export const MainPage = () => {
     <section className={s.main}>
       <div className={s.main__header}>
         <form className={s.from}>
-          <InputSearch />
+          <InputSearch search={search} onChangeSearchInput={onChangeSearchInput} />
           <div className={s.from__filter}>
             <button onClick={onClickHandlerSortRating} type='button'>
               <img src={sort ? i_filter : i_filter_revers} alt='sort' />
@@ -97,6 +116,7 @@ export const MainPage = () => {
               booking={card.booking}
               image={card.image}
               rating={card.rating}
+              search={search}
             />
           ))
         ) : (
