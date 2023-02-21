@@ -7,9 +7,10 @@ export const getBooksTC = (): AppThunkType => async (dispatch, getState) => {
   dispatch(setAppStatusLoading('loading'));
   try {
     const response = await booksApi.getBooks();
+    const payload = getValueCategories(response.data, getState().app.categories);
 
     dispatch(setBooks(sortBooksRatingDefault(response.data)));
-    dispatch(setAppCategories(getValueCategories(response.data, getState().app.categories)));
+    dispatch(setAppCategories(payload));
     dispatch(setAppStatusLoading('succeeded'));
   } catch (error: unknown) {
     dispatch(setAppError(getErrorResponse(error)));

@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { setBooksSortRating } from '../../actions';
 import i_filter from '../../assets/icon/icon_filter_lg.svg';
@@ -9,13 +11,14 @@ import icon_list from '../../assets/icon/icon_list.svg';
 import icon_list_active from '../../assets/icon/icon_list_active.svg';
 import { BookCard, InputSearch } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { BookI } from '../../interface';
+import { BookI, CategoriesI } from '../../interface';
 import { getBooksTC } from '../../thunks';
 
 import s from './main-page.module.scss';
 
 export const MainPage = () => {
   const dispatch = useAppDispatch();
+  const { category } = useParams();
   const [viewCards, setViewCards] = useState<'GRID' | 'LIST'>('GRID');
   const [styleViewGrid, setStyleViewGrid] = useState(`${s.menu__item} ${s.menu__item_active}`);
   const [styleViewList, setStyleViewList] = useState(`${s.menu__item}`);
@@ -24,6 +27,15 @@ export const MainPage = () => {
 
   const items = useAppSelector<BookI[]>((state) => state.books.items);
   const sort = useAppSelector<boolean>((state) => state.books.sort);
+  const categories = useAppSelector<CategoriesI[]>((state) => state.app.categories);
+
+  let books = items;
+
+  const filter = categories.find((el) => el.path === category);
+
+  if (filter) {
+    books = items.filter((book) => book.categories.find((name) => name === filter.name));
+  }
 
   const onClickView = () => {
     setViewCards((prevState) => (prevState === 'GRID' ? 'LIST' : 'GRID'));
@@ -73,19 +85,23 @@ export const MainPage = () => {
           </button>
         </div>
       </div>
-      <div className={`${s.main__content} ${contentView}`}>
-        {items.map((card) => (
-          <BookCard
-            key={card.id}
-            id={card.id}
-            view={viewCards}
-            authors={card.authors}
-            title={card.title}
-            booking={card.booking}
-            image={card.image}
-            rating={card.rating}
-          />
-        ))}
+      <div className={classNames(s.main__content, { [`${contentView}`]: books.length >= 1 })}>
+        {books.length >= 1 ? (
+          books.map((card) => (
+            <BookCard
+              key={card.id}
+              id={card.id}
+              view={viewCards}
+              authors={card.authors}
+              title={card.title}
+              booking={card.booking}
+              image={card.image}
+              rating={card.rating}
+            />
+          ))
+        ) : (
+          <div className={s.main__message}>В этой категории книг ещё нет</div>
+        )}
       </div>
     </section>
   );

@@ -3,10 +3,10 @@ import { BookI, ErrorResponseI } from '../interface';
 import { BooksActionReturnType, StatusLoading } from '../types';
 
 interface InitialStateI {
-  items: BookI[];
-  error: ErrorResponseI | null;
   statusLoading: StatusLoading;
+  items: BookI[];
   sort: boolean;
+  error: ErrorResponseI | null;
 }
 
 const initialState: InitialStateI = {
