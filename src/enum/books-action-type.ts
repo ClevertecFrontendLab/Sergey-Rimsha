@@ -4,4 +4,5 @@ export enum BooksActionType {
   SET_ERROR_RESPONSE = '[BooksActionType] SET_ERROR_RESPONSE',
   SET_SORT_RATING = '[BooksActionType] SET_SORT_RATING',
   SET_FILTRATION = '[BooksActionType] SET_FILTRATION',
+  SET_SEARCH = '[BooksActionType] SET_SEARCH',
 }

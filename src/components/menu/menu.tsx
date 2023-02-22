@@ -87,12 +87,13 @@ export const Menu = memo(({ menuType }: MenuI) => {
           </NavLink>
           {categories.map((item) => (
             <NavLink
-              data-test-id={`${testLink}${item.path}`}
               onClick={onClickHandlerMenu}
               className={styleLink}
               key={item.id}
               to={`${Paths.BOOKS}/${item.path}`}>
-              <span className={s.link__title}>{item.name}</span>
+              <span data-test-id={`${testLink}${item.path}`} className={s.link__title}>
+                {item.name}
+              </span>
               <span data-test-id={`${testLinkValue}${item.path}`} className={s.link__value}>
                 {item.value}
               </span>

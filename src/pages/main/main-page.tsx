@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { setBooksSortRating } from '../../actions';
+import { setBooksSearch, setBooksSortRating } from '../../actions';
 import i_filter from '../../assets/icon/icon_filter_lg.svg';
 import i_filter_revers from '../../assets/icon/icon_filter_revers.svg';
 import icon_grid from '../../assets/icon/icon_grid.svg';
@@ -11,7 +11,7 @@ import icon_list from '../../assets/icon/icon_list.svg';
 import icon_list_active from '../../assets/icon/icon_list_active.svg';
 import { BookCard, InputSearch } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { BookI, CategoriesI } from '../../interface';
+import { BooksStateI, CategoriesI } from '../../interface';
 import { getBooksTC } from '../../thunks';
 
 import s from './main-page.module.scss';
@@ -19,17 +19,15 @@ import s from './main-page.module.scss';
 export const MainPage = () => {
   const dispatch = useAppDispatch();
   const { category } = useParams();
-  const [viewCards, setViewCards] = useState<'GRID' | 'LIST'>('GRID');
-  const [styleViewGrid, setStyleViewGrid] = useState(`${s.menu__item} ${s.menu__item_active}`);
-  const [styleViewList, setStyleViewList] = useState(`${s.menu__item}`);
-
-  const [contentView, setContentView] = useState(`${s.main__content_grid}`);
-
-  const [search, setSearch] = useState<string>('');
-
-  const items = useAppSelector<BookI[]>((state) => state.books.items);
-  const sort = useAppSelector<boolean>((state) => state.books.sort);
+  const { items, sort, search } = useAppSelector<BooksStateI>((state) => state.books);
   const categories = useAppSelector<CategoriesI[]>((state) => state.app.categories);
+
+  const [viewCards, setViewCards] = useState<'GRID' | 'LIST'>('GRID');
+
+  const contentView = classNames({
+    [`${s.main__content_grid}`]: viewCards === 'GRID',
+    [`${s.main__content_list}`]: viewCards === 'LIST',
+  });
 
   let books = items;
 
@@ -55,7 +53,7 @@ export const MainPage = () => {
   };
 
   const onChangeSearchInput = (text: string) => {
-    setSearch(text);
+    dispatch(setBooksSearch(text));
   };
 
   const emptyDataText = () => {
@@ -75,21 +73,6 @@ export const MainPage = () => {
   };
 
   useEffect(() => {
-    const styleActive = `${s.menu__item} ${s.menu__item_active}`;
-    const styleDefault = `${s.menu__item}`;
-
-    if (viewCards === 'GRID') {
-      setStyleViewGrid(styleActive);
-      setStyleViewList(styleDefault);
-      setContentView(`${s.main__content_grid}`);
-    } else if (viewCards === 'LIST') {
-      setStyleViewList(styleActive);
-      setStyleViewGrid(styleDefault);
-      setContentView(`${s.main__content_list}`);
-    }
-  }, [viewCards]);
-
-  useEffect(() => {
     dispatch(getBooksTC());
   }, [dispatch]);
 
@@ -106,10 +89,18 @@ export const MainPage = () => {
           </div>
         </form>
         <div className={s.menu}>
-          <button className={styleViewGrid} type='button' onClick={onClickView} data-test-id='button-menu-view-window'>
+          <button
+            className={classNames(s.menu__item, { [`${s.menu__item_active}`]: viewCards === 'GRID' })}
+            type='button'
+            onClick={onClickView}
+            data-test-id='button-menu-view-window'>
             <img src={viewCards === 'GRID' ? icon_grid_active : icon_grid} alt='grid' />
           </button>
-          <button className={styleViewList} type='button' onClick={onClickView} data-test-id='button-menu-view-list'>
+          <button
+            className={classNames(s.menu__item, { [`${s.menu__item_active}`]: viewCards === 'LIST' })}
+            type='button'
+            onClick={onClickView}
+            data-test-id='button-menu-view-list'>
             <img src={viewCards === 'LIST' ? icon_list_active : icon_list} alt='table' />
           </button>
         </div>

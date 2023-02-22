@@ -28,10 +28,6 @@
       right: -2px;
       margin-left: 22px;
     }
-
-    &_show {
-      display: none;
-    }
   }
 
   &__box {
@@ -64,6 +60,7 @@
     -webkit-appearance: none;
     outline: none;
     margin-right: 5px;
+    caret-color: #f83600;
 
     @media screen and (max-width: 640px) {
       display: none;
@@ -71,7 +68,10 @@
 
     &_change {
       display: block;
-      margin-left: 16px;
+      color: $color-dark;
+      @media screen and (max-width: 640px) {
+        margin-left: 16px;
+      }
     }
   }
 
@@ -82,7 +82,6 @@
     position: relative;
     border: none;
     background-color: $color-white;
-
     margin-right: 11px;
 
     & span {
@@ -104,6 +103,10 @@
 
     &_show {
       display: block;
+
+      @media screen and (min-width: 560px) {
+        display: none;
+      }
     }
   }
 
