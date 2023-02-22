@@ -21,7 +21,7 @@ export const HeaderPage = () => (
         </div>
       </NavLink>
       <div className={s.header__content}>
-        <Menu menuType='burger' />
+        <Menu menuId='burger' />
         <div className={s.header__title}>Библиотека</div>
         <div className={`${s.header__login} ${s.login}`}>
           <div className={s.login__title}>Привет, Иван!</div>
