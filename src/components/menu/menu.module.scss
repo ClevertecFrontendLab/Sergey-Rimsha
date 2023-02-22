@@ -306,6 +306,13 @@
       color: $color-accent;
     }
 
+    & span {
+      &:last-child {
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+
     &_active {
       font-weight: 700;
       font-size: 18px;
@@ -314,6 +321,16 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       text-fill-color: transparent;
+
+      & span {
+        &:last-child {
+          background: $color-dark;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-fill-color: transparent;
+        }
+      }
     }
   }
   &__value {

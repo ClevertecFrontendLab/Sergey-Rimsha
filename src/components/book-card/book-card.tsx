@@ -19,10 +19,12 @@ interface BookCardI {
   } | null;
   id: number;
   booking: BookingI | null;
+  search: string;
 }
 
-export const BookCard = memo(({ id, title, authors, rating, image, booking, view }: BookCardI) => {
+export const BookCard = memo(({ id, title, authors, rating, image, booking, view, search }: BookCardI) => {
   const { category } = useParams();
+
   const showRating = (rate: number | null) => (
     <div className={s.rating}>
       {rate === null
@@ -49,6 +51,34 @@ export const BookCard = memo(({ id, title, authors, rating, image, booking, view
     buttonType = 'Primary';
   }
 
+  const customTitle = (str: string): any => {
+    if (!search) return str;
+    const regexp = new RegExp(search, 'ig');
+    const matchValue = str.match(regexp);
+
+    if (matchValue) {
+      return str.split(regexp).map((string, index, array) => {
+        if (index < array.length - 1) {
+          const c = matchValue.shift();
+
+          return (
+            // eslint-disable-next-line react/no-array-index-key
+            <span key={index}>
+              {string}
+              <span data-test-id='highlight-matches' className={s.searchTitle}>
+                {c}
+              </span>
+            </span>
+          );
+        }
+
+        return string;
+      });
+    }
+
+    return str;
+  };
+
   const bookCardList = () => (
     <div className={s.listCard}>
       <div className={s.listCard__img}>
@@ -56,7 +86,7 @@ export const BookCard = memo(({ id, title, authors, rating, image, booking, view
       </div>
       <div className={s.listCard__content}>
         <div className={s.listCard__header}>
-          <div className={s.listCard__title}>{title}</div>
+          <div className={s.listCard__title}>{customTitle(title)}</div>
           <div className={s.listCard__authors}>{authors.join(',')}</div>
         </div>
         <div className={s.listCard__wrap}>
@@ -76,7 +106,7 @@ export const BookCard = memo(({ id, title, authors, rating, image, booking, view
       </div>
       <div className={s.gridCard__rating}>{showRating(rating)}</div>
       <div className={s.gridCard__content}>
-        <div className={s.gridCard__title}>{title}</div>
+        <div className={s.gridCard__title}>{customTitle(title)}</div>
         <div className={s.gridCard__authors}>{authors[0]}</div>
       </div>
       <div className={s.gridCard__button}>

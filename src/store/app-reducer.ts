@@ -1,22 +1,15 @@
 import { AppActionType } from '../enum';
-import { CategoriesI, ErrorResponseI } from '../interface';
-import { AppActionReturnType, StatusLoading } from '../types';
+import { AppStateI } from '../interface';
+import { AppActionReturnType } from '../types';
 
-interface InitialStateType {
-  statusLoading: StatusLoading;
-  error: ErrorResponseI | null;
-  isInitialized: boolean;
-  categories: CategoriesI[];
-}
-
-const initialState: InitialStateType = {
+const initialState: AppStateI = {
   statusLoading: 'idle',
   error: null,
   isInitialized: false,
   categories: [],
 };
 
-export const appReducer = (state = initialState, action: AppActionReturnType): InitialStateType => {
+export const appReducer = (state = initialState, action: AppActionReturnType): AppStateI => {
   switch (action.type) {
     case AppActionType.SET_STATUS_LOADING:
       return {

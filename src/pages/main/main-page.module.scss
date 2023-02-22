@@ -37,8 +37,27 @@
         grid-row-gap: 16px;
       }
     }
+  }
+  &__message {
+    width: 100%;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    letter-spacing: 0.1px;
+    color: $color-grey-a7;
 
-    &_list {
+    margin-top: 200px;
+
+    @media screen and (max-width: 840px) {
+      margin-top: 226px;
+    }
+
+    @media screen and (max-width: 560px) {
+      padding: 0 15px;
+      font-size: 18px;
+      line-height: 28px;
+      margin-top: 136px;
     }
   }
 }

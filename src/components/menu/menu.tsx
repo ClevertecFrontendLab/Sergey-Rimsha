@@ -9,12 +9,12 @@ import { CategoriesI } from '../../interface';
 import s from './menu.module.scss';
 
 interface MenuI {
-  menuType: 'sidebar' | 'burger';
+  menuId: 'navigation' | 'burger';
 }
 
-export const Menu = memo(({ menuType }: MenuI) => {
+export const Menu = memo(({ menuId }: MenuI) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const [selectMenuShow, setSelectMenuShow] = useState<boolean>(false);
+  const [selectMenuShow, setSelectMenuShow] = useState<boolean>(true);
   const categories = useAppSelector<CategoriesI[]>((state) => state.app.categories);
 
   const clickMenuRef = useRef<HTMLDivElement>(null);
@@ -54,11 +54,6 @@ export const Menu = memo(({ menuType }: MenuI) => {
     return () => document.removeEventListener('click', onHandlerClick);
   }, [showMenu]);
 
-  const testAllBooks = menuType === 'sidebar' ? 'navigation-books' : 'burger-books';
-  const testBooks = menuType === 'sidebar' ? 'navigation-showcase' : 'burger-showcase';
-  const testTerms = menuType === 'sidebar' ? 'navigation-terms' : 'burger-terms';
-  const testContract = menuType === 'sidebar' ? 'navigation-contract' : 'burger-contract';
-
   const styleTitle = ({ isActive }: { isActive: boolean }) =>
     classNames(
       `${s.nav__title}`,
@@ -67,8 +62,12 @@ export const Menu = memo(({ menuType }: MenuI) => {
     );
 
   const sidebarMenu = () => (
-    <nav className={classNames(`${s.nav}`, { [`${s.sidebar}`]: menuType === 'sidebar' })}>
-      <button className={s.nav__button} data-test-id={testBooks} onClick={onClickHandlerSelectMenu} type='button'>
+    <nav className={classNames(`${s.nav}`, { [`${s.sidebar}`]: menuId === 'navigation' })}>
+      <button
+        className={s.nav__button}
+        data-test-id={`${menuId}-showcase`}
+        onClick={onClickHandlerSelectMenu}
+        type='button'>
         <NavLink className={styleTitle} to='/books'>
           <div>Витрина книг</div>
           <div>{}</div>
@@ -77,7 +76,7 @@ export const Menu = memo(({ menuType }: MenuI) => {
       <div className={classNames(`${s.nav__links}`, { [`${s.nav__links_show}`]: selectMenuShow })}>
         <div className={s.link}>
           <NavLink
-            data-test-id={testAllBooks}
+            data-test-id={`${menuId}-books`}
             onClick={onClickHandlerMenu}
             className={styleLink}
             to={`${Paths.BOOKS}/all`}>
@@ -89,16 +88,24 @@ export const Menu = memo(({ menuType }: MenuI) => {
               className={styleLink}
               key={item.id}
               to={`${Paths.BOOKS}/${item.path}`}>
-              <span className={s.link__title}>{item.name}</span>
-              <span className={s.link__value}>{item.id}</span>
+              <span data-test-id={`${menuId}-${item.path}`} className={s.link__title}>
+                {item.name}
+              </span>
+              <span data-test-id={`${menuId}-book-count-for-${item.path}`} className={s.link__value}>
+                {item.value}
+              </span>
             </NavLink>
           ))}
         </div>
       </div>
-      <NavLink data-test-id={testTerms} onClick={onClickSubTitle} className={styleSubLink} to={Paths.TERMS}>
+      <NavLink data-test-id={`${menuId}-terms`} onClick={onClickSubTitle} className={styleSubLink} to={Paths.TERMS}>
         Правила пользования
       </NavLink>
-      <NavLink data-test-id={testContract} onClick={onClickSubTitle} className={styleSubLink} to={Paths.CONTRACT}>
+      <NavLink
+        data-test-id={`${menuId}-contract`}
+        onClick={onClickSubTitle}
+        className={styleSubLink}
+        to={Paths.CONTRACT}>
         Договор оферты
       </NavLink>
     </nav>
@@ -129,5 +136,5 @@ export const Menu = memo(({ menuType }: MenuI) => {
     </div>
   );
 
-  return menuType === 'sidebar' ? sidebarMenu() : burgerMenu();
+  return menuId === 'navigation' ? sidebarMenu() : burgerMenu();
 });

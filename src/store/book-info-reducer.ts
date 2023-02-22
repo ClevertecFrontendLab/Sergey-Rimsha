@@ -1,17 +1,13 @@
 import { BookInfoActionType } from '../enum';
-import { BookInfoI, ErrorResponseI } from '../interface';
+import { BookInfoStateI } from '../interface';
 import { BookInfoActionReturnType } from '../types';
 
-interface InitialStateI {
-  book: BookInfoI;
-  error: ErrorResponseI | null;
-}
-const initialState: InitialStateI = {
+const initialState: BookInfoStateI = {
   book: {},
   error: null,
 };
 
-export const bookInfoReducer = (state = initialState, action: BookInfoActionReturnType): InitialStateI => {
+export const bookInfoReducer = (state = initialState, action: BookInfoActionReturnType): BookInfoStateI => {
   switch (action.type) {
     case BookInfoActionType.SET_BOOK:
       return {

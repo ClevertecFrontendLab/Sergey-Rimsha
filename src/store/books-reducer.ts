@@ -1,20 +1,16 @@
 import { BooksActionType } from '../enum';
-import { BookI, ErrorResponseI } from '../interface';
-import { BooksActionReturnType, StatusLoading } from '../types';
+import { BooksStateI } from '../interface';
+import { BooksActionReturnType } from '../types';
 
-interface InitialStateI {
-  items: BookI[];
-  error: ErrorResponseI | null;
-  statusLoading: StatusLoading;
-}
-
-const initialState: InitialStateI = {
+const initialState: BooksStateI = {
   items: [],
   error: null,
   statusLoading: 'idle',
+  sort: true,
+  search: '',
 };
 
-export const booksReducer = (state = initialState, action: BooksActionReturnType): InitialStateI => {
+export const booksReducer = (state = initialState, action: BooksActionReturnType): BooksStateI => {
   switch (action.type) {
     case BooksActionType.SET_STATUS_LOADING:
       return {
@@ -32,6 +28,17 @@ export const booksReducer = (state = initialState, action: BooksActionReturnType
         ...state,
         items: [],
         error: action.error,
+      };
+    case BooksActionType.SET_SORT_RATING:
+      return {
+        ...state,
+        items: [...state.items.reverse()],
+        sort: action.sort,
+      };
+    case BooksActionType.SET_SEARCH:
+      return {
+        ...state,
+        search: action.search,
       };
     default:
       return state;
