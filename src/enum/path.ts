@@ -3,4 +3,5 @@ export enum Paths {
   TERMS = '/terms',
   CONTRACT = '/contract',
   AUTH = '/auth',
+  REGISTRATION = '/registration',
 }
