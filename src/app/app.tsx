@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 import { ModalError, Spinner } from '../components';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { FooterPage, HeaderPage } from '../pages';
 import { Routing } from '../routing';
 import { getCategoriesTC } from '../thunks';
 
@@ -21,10 +20,8 @@ export const App = () => {
       {statusLoading === 'loading' ? <Spinner /> : ''}
       <div className={s.app__body}>
         <ModalError />
-        <HeaderPage />
         <Routing />
       </div>
-      <FooterPage />
     </div>
   );
 };

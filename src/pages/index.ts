@@ -4,3 +4,4 @@ export { HeaderPage } from './header';
 export { BookInfoPage } from './book-info';
 export { TermsPage } from './terms';
 export { ContractPage } from './contract';
+export { Auth } from './auth';

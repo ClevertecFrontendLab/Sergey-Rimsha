@@ -4,9 +4,7 @@
 .container {
   @include ContainerApp();
   display: flex;
-}
 
-.layout {
   margin-top: 62px;
   margin-bottom: 62px;
 
@@ -17,4 +15,7 @@
   @media screen and (max-width: 420px) {
     margin-top: 8px;
   }
+}
+
+.layout {
 }

@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Layout } from '../app';
 import { Paths } from '../enum';
-import { BookInfoPage, ContractPage, MainPage, TermsPage } from '../pages';
+import { Auth, BookInfoPage, ContractPage, MainPage, TermsPage } from '../pages';
 
 export const Routing = () => (
   <Routes>
@@ -13,6 +13,7 @@ export const Routing = () => (
       <Route path={Paths.TERMS} element={<TermsPage />} />
       <Route path={Paths.CONTRACT} element={<ContractPage />} />
     </Route>
+    <Route path={Paths.AUTH} element={<Auth />} />
     <Route path={`${Paths.BOOKS}/:category/:id`} element={<BookInfoPage />} />
   </Routes>
 );
