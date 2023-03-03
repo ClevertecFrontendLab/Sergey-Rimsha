@@ -1,0 +1,112 @@
+.group {
+  width: 416px;
+  height: 76px;
+
+  &__box {
+    width: 100%;
+    height: 56px;
+    background: #f9f9fa;
+    border-radius: 4px 4px 0 0;
+    padding: 0 12px 12px 12px;
+    border-bottom: 1px solid #bfc4c9;
+
+    & label {
+      position: relative;
+    }
+
+    & span {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    & input {
+      margin-top: 19px;
+
+      &:focus,
+      &:valid {
+        margin-top: 26px;
+        outline: none;
+      }
+
+      &:focus ~ button,
+      &:valid ~ button {
+        display: block;
+      }
+
+      &:focus ~ img,
+      &:valid ~ img {
+        display: block;
+      }
+
+      &:focus ~ span,
+      &:valid ~ span {
+        top: -19px;
+
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        color: #a7a7a7;
+      }
+    }
+  }
+
+  &__input {
+    width: 100%;
+    height: 18px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.1px;
+    color: #363636;
+    background: #f9f9fa;
+    border: none;
+  }
+
+  &__title {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.1px;
+    color: #363636;
+
+    transition: 0.2s;
+  }
+
+  &__validate {
+    display: none;
+    width: 24px;
+    height: 24px;
+
+    position: absolute;
+    right: 29px;
+    top: -5px;
+  }
+
+  &__eye {
+    display: none;
+    position: absolute;
+    top: -5px;
+    right: 0;
+    border: none;
+    background: #f9f9fa;
+    cursor: pointer;
+
+    & img {
+      display: block;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__message {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+    color: #a7a7a7;
+    margin-left: 12px;
+    margin-top: 2px;
+  }
+}

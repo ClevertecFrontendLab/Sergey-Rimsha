@@ -1,3 +1,5 @@
+import { ButtonForm, InputForm } from '../../../components';
+
 import s from './registration.module.scss';
 
 export const Registration = () => {
@@ -8,15 +10,13 @@ export const Registration = () => {
       <div className={s.form__title}>Регистрация</div>
       <div className={s.form__crumbs}>1 шаг из 3</div>
       <div className={s.form__item}>
-        <input />
+        <InputForm />
       </div>
       <div className={s.form__item}>
-        <input />
+        <InputForm />
       </div>
       <div className={s.form__item}>
-        <button className={s.button} type='button'>
-          button
-        </button>
+        <ButtonForm />
       </div>
     </form>
   );

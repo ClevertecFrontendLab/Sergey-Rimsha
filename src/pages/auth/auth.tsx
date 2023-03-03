@@ -9,7 +9,6 @@ export const Auth = () => {
     <section className={s.auth}>
       <div className={s.container}>
         <div className={s.auth__title}>Cleverland</div>
-
         <Outlet />
       </div>
     </section>
