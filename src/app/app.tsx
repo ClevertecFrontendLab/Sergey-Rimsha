@@ -13,14 +13,22 @@ export const App = () => {
   const dispatch = useAppDispatch();
   const statusLoading = useAppSelector((state) => state.app.statusLoading);
 
+  const isAuth = false;
+
   useEffect(() => {
-    dispatch(getCategoriesTC());
-  }, [dispatch]);
+    if (isAuth) {
+      dispatch(getCategoriesTC());
+    }
+  }, [dispatch, isAuth]);
 
   return (
     <div className={s.app}>
       <div>
-        <NavLink to={`${Paths.AUTH}${Paths.REGISTRATION}`}>REGISTRATION</NavLink>
+        <NavLink to={Paths.AUTH}>auth</NavLink>
+        <span>{' / '}</span>
+        <NavLink to={Paths.REGISTRATION}>REGISTRATION</NavLink>
+        <span>{' / '}</span>
+        <NavLink to={Paths.FORGOT_PASS}>FORGOT_PASS</NavLink>
         <span>{' / '}</span>
         <NavLink to='/'>home</NavLink>
       </div>

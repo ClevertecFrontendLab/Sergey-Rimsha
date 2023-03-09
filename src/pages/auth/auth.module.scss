@@ -23,10 +23,106 @@
     letter-spacing: 0.1px;
     color: $color-white;
     margin-top: 16px;
+    margin-bottom: 46px;
 
     @media screen and (max-width: 530px) {
       font-size: 18px;
       line-height: 28px;
+    }
+  }
+}
+
+.login {
+  width: 528px;
+  height: 492px;
+  background: $color-white;
+  border-radius: 16px;
+  padding: 48px 56px;
+
+  @media screen and(max-width: 530px) {
+    width: 288px;
+    height: 452px;
+    margin-top: 14px;
+    padding: 24px 16px;
+  }
+
+
+
+  &__title {
+    width: 100%;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 32px;
+    letter-spacing: 0.1px;
+    color: $color-dark;
+  }
+
+  &__footer {
+    display: flex;
+    margin-top: 16px;
+
+    @media screen and (max-width: 530px) {
+      display: block;
+    }
+  }
+
+  &__description {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.1px;
+    color: $color-grey;
+    margin-right: 16px;
+
+    @media screen and (max-width: 530px) {
+      font-size: 15px;
+      line-height: 20px;
+    }
+  }
+
+  &__login {
+    display: flex;
+    align-items: center;
+
+    & span {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+      color: $color-dark;
+    }
+
+    & img {
+      width: 24px;
+      height: 24px;
+      margin-left: 12px;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &__box {
+    width: 100%;
+
+    &_item {
+      margin-top: 16px;
+      @media screen and (max-width: 530px) {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  &__button {
+    margin-top: 48px;
+
+    @media screen and (max-width: 530px) {
+      margin-top: 34px;
     }
   }
 }
