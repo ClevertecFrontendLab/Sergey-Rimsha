@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &__box {
+    width: 100%;
+
+    &_item {
+      margin-top: 16px;
+      @media screen and (max-width: 530px) {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  &__button {
+    margin-top: 48px;
+
+    @media screen and (max-width: 530px) {
+      margin-top: 34px;
+    }
+  }
+}

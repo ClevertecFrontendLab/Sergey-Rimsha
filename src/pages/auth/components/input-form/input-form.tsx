@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import eye from '../../assets/icon/icon_eye.svg';
-import eye_sleep from '../../assets/icon/icon_eye_sleap.svg';
-import validate_pass from '../../assets/icon/icon_validate_ok.svg';
+import eye from '../../../../assets/icon/icon_eye.svg';
+import eye_sleep from '../../../../assets/icon/icon_eye_sleap.svg';
+import validate_pass from '../../../../assets/icon/icon_validate_ok.svg';
 
 import s from './input-form.module.scss';
 

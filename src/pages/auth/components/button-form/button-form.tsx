@@ -2,7 +2,7 @@ import s from './button-form.module.scss';
 
 export const ButtonForm = () => {
   const propsType = 'button';
-  const propsDisabled = true;
+  const propsDisabled = false;
 
   return (
     <div className={s.group}>
